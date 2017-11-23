@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,6 +56,8 @@ public class LoginClient extends Application {
             e.printStackTrace();
         }
     }
+
+
 
     public Stage getPrimaryStage() {
         return primaryStage;
