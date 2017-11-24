@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -20,9 +20,13 @@ import java.util.ResourceBundle;
 
 public class LoginController  {
 
-
+//Login Frame
     @FXML private Button login, create;
     @FXML private TextField login_f, pwd_f;
+//Register Frame
+    @FXML private RadioButton radioBtn1, radioBtn2;
+    final ToggleGroup group= new ToggleGroup();
+
     // 로그인 애플리케이션 참조
     private LoginClient loginClient;
 
@@ -31,6 +35,9 @@ public class LoginController  {
     }
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
+        radioBtn1.setToggleGroup(group);
+        radioBtn1.setSelected(true);
+        radioBtn2.setToggleGroup(group);
     }
     public void sendData(String str){
         PrintWriter pw = null;
@@ -89,15 +96,18 @@ public class LoginController  {
 
         //로그인 화면에서 계정생성 화면으로 전환하기
         try{
-            Parent register= FXMLLoader.load(getClass().getResource("view/RegisterFrame.fxml"));
-            Scene s= new Scene(register);
-            Stage primaryStage=loginClient.getPrimaryStage();
+
+            Stage primaryStage= new Stage();
+            Parent root= FXMLLoader.load(getClass().getResource("view/RegisterFrame.fxml"));
+            Scene s= new Scene(root);
             primaryStage.setScene(s);
+            primaryStage.show();
+
         }catch(IOException e){
             e.printStackTrace();
         }
 
-    }
+}
 //    public void setClient(Client client){
 //        this.client=client;
 //    }

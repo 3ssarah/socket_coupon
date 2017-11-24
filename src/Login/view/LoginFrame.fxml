@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="340.0" text="Login" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="Login.LoginController">
+            fx:controller="Login.LoginController">
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -17,7 +18,7 @@ fx:controller="Login.LoginController">
             <TextField fx:id="id_f" layoutX="140.0" layoutY="325.0" />
             <TextField fx:id="pwd_f" layoutX="140.0" layoutY="354.0" />
             <Button fx:id="login"  onAction="#handleLogin" layoutX="94.0" layoutY="415.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="168.0" text="Login" />
-            <Label layoutX="50.0" layoutY="93.0" prefHeight="27.0" prefWidth="238.0" text="Small Store Coupon">
+            <Label layoutX="50.0" layoutY="93.0" prefHeight="27.0" prefWidth="238.0" text="Small Store Gift-Card">
                <font>
                   <Font name="Arial Bold Italic" size="24.0" />
                </font>
@@ -25,5 +26,7 @@ fx:controller="Login.LoginController">
             <Button fx:id="create" onAction= "#handleCreate" layoutX="96.0" layoutY="449.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="165.0" text="Create new one" />
          </children>
       </AnchorPane>
+
+
    </content>
 </TitledPane>

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="340.0" text="Register"  xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Login.LoginController">
+<TitledPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="340.0" text="Register" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.LoginController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -19,11 +18,11 @@
             <TextField layoutX="117.0" layoutY="122.0" />
             <TextField layoutX="117.0" layoutY="175.0" />
             <TextField layoutX="117.0" layoutY="226.0" />
-            <Button layoutX="93.0" layoutY="386.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="153.0" text="START" />
-            <Button layoutX="93.0" layoutY="426.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="153.0" text="Cancle" />
-            <RadioButton layoutX="110.0" layoutY="296.0" mnemonicParsing="false" text="As a Customer" />
-            <RadioButton layoutX="110.0" layoutY="321.0" mnemonicParsing="false" text="As a shop Owner" />
-            <Label layoutX="66.0" layoutY="59.0" prefHeight="21.0" prefWidth="209.0" text="Personal shop Coupon" textAlignment="CENTER">
+            <Button  fx:id="createBtn" layoutX="93.0" layoutY="386.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="153.0" text="CREATE" />
+            <Button fx:id="cancelBtn" layoutX="93.0" layoutY="426.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="153.0" text="Cancel" />
+            <RadioButton fx:id="radioBtn1" layoutX="110.0" layoutY="296.0" mnemonicParsing="false" text="As a Customer" />
+            <RadioButton fx:id="radioBtn2" layoutX="110.0" layoutY="321.0" mnemonicParsing="false" text="As a shop Owner" />
+            <Label layoutX="66.0" layoutY="59.0" prefHeight="21.0" prefWidth="209.0" text="Small store Gift-Card" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold Italic" size="18.0" />
                </font>
