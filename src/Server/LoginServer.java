@@ -1,4 +1,4 @@
-package Login;
+package Server;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -104,6 +104,7 @@ class LoginThread extends Thread{
 
                 //new member
                 if(mode==0){
+
                     phoneNumber=br.readLine();
                     //if ID is not distinctive
                     if(member.IDCheck(id)==1)
@@ -115,7 +116,7 @@ class LoginThread extends Thread{
                         pw.println("Registration Complete!");
                     }
                 }
-                //Login
+                //Client.Login
                 else if(mode==1){
                     int result= member.Check(id,pwd);
                     switch(result){
@@ -172,7 +173,7 @@ public class LoginServer{
         try{
             serverSock= new ServerSocket(12345);
             while(true){
-                System.out.println("...Login Server Waiting....");
+                System.out.println("... Server Waiting....");
                 sock=serverSock.accept();
                 vec.add(sock);
 
