@@ -14,17 +14,19 @@ public class RegisterStage extends Stage {
 
 
     public RegisterStage(LoginClient client){
+
         try{
 
             FXMLLoader loader= new FXMLLoader(getClass().getResource("RegisterFrame.fxml"));
-            AnchorPane pane= (AnchorPane)loader.load();
+           Parent register= loader.load();
+
 
             controller =loader.getController();
             controller.setLoginClient(client);
 
-            Scene s= new Scene(pane);
-            setScene(s);
-            show();
+//            Scene s= new Scene(pane);
+//            setScene(s);
+//            show();
 
     }catch(Exception e){
             e.printStackTrace();

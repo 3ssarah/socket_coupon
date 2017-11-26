@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="register" minHeight="0.0" minWidth="0.0" prefHeight="522" prefWidth="340.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Register.RegisterController">
+<AnchorPane fx:id="register" minHeight="0.0" minWidth="0.0" prefHeight="522" prefWidth="340.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Register.RegisterController">
 
          <children>
             <Label layoutX="68.0" layoutY="126.0" text="ID" />
@@ -15,7 +16,7 @@
             <Label layoutX="65.0" layoutY="230.0" text="P.H" />
             <TextField fx:id="id_field" layoutX="117.0" layoutY="122.0" />
             <TextField fx:id="pwd_field" layoutX="117.0" layoutY="175.0" />
-            <TextField fx:id="phone_filed" layoutX="117.0" layoutY="226.0" />
+            <TextField fx:id="phone_field" layoutX="117.0" layoutY="226.0" />
             <Button fx:id="createBtn" layoutX="93.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleCreateBtn_r" prefHeight="23.0" prefWidth="153.0" text="CREATE" />
             <Button fx:id="cancelBtn" layoutX="93.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleCancel_r" prefHeight="23.0" prefWidth="153.0" text="Cancel" />
             <RadioButton fx:id="radioBtn1" layoutX="110.0" layoutY="296.0" mnemonicParsing="false" text="As a Customer" />

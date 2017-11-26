@@ -35,9 +35,6 @@ public class LoginClient extends Application {
         //initRootLayout();
         initLoginStage();
     }
-    public void changetoCreate(){
-
-    }
 
 
     /**try connect to server and Login**/
@@ -46,13 +43,13 @@ public class LoginClient extends Application {
 
         try{
             br= new BufferedReader(new InputStreamReader(this.getClient().getLoginSock().getInputStream()));
-            sendData("1");// send mode data: log in mode
+
 
             sendData(data.getID());
             sendData(data.getPwd());
 
             //receive msg from server
-            String check=null;
+            String check= null;
             check=br.readLine();
 
             //Login complete
@@ -73,6 +70,16 @@ public class LoginClient extends Application {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void saveNew_member(UserData data){
+        sendData("0");//send Register signal
+        sendData(data.getID());
+        sendData(data.getPwd());
+        sendData(data.getPhone());
+        String shop="false";
+        if(data.isShop()==true)shop="true";
+        sendData(shop);
     }
 
     /** Send data to Server **/

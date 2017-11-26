@@ -86,6 +86,7 @@ class LoginThread extends Thread{
         String id = null;
         String pwd =null;
         String phoneNumber=null;
+        String shop=null;
 
         int mode;
         BufferedReader br=null;
@@ -95,9 +96,11 @@ class LoginThread extends Thread{
             while(true){
                 br= new BufferedReader(new InputStreamReader(sock.getInputStream()));
                 pw= new PrintWriter(sock.getOutputStream(),true);
+
                 mode= Integer.parseInt(br.readLine());
                 //quit sing input
                 if(mode ==-1) break;
+
                 //get id and pwd from client
                 id= br.readLine();
                 pwd=br.readLine();
@@ -106,13 +109,15 @@ class LoginThread extends Thread{
                 if(mode==0){
 
                     phoneNumber=br.readLine();
+                    shop=br.readLine();
+                    System.out.println(shop);
                     //if ID is not distinctive
                     if(member.IDCheck(id)==1)
                         pw.println("ID already exits!");
                     else{
                         //write on member file
                         member.InsertMemeber(id,pwd);
-                        this.saveMemInfo(id,phoneNumber);
+                        this.saveMemInfo(id,phoneNumber,shop);
                         pw.println("Registration Complete!");
                     }
                 }
@@ -149,11 +154,15 @@ class LoginThread extends Thread{
         }
     }
 
-    public void saveMemInfo(String ID, String phoneNumber){
-        FileWriter fw=null;
+    public void saveMemInfo(String ID, String phoneNumber,String shop){
+
+
+        String filename = getClass().getResource("").getPath()+"/MemberInfo/"+ID+".txt";
         try{
-            fw= new FileWriter(getClass().getResource("").getPath()+ID+".txt");
+
+            BufferedWriter fw= new BufferedWriter(new FileWriter((filename)));
             fw.write(phoneNumber+"\n");
+            fw.write(shop+"\n");
             fw.close();
         }catch(IOException e){
             System.out.println(e.getMessage());

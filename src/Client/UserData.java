@@ -6,8 +6,15 @@ public class UserData {
     private String ID=null;
     private String pwd=null;
     private String phone=null;
-    private int balance;
+    private int balance = 0;
     private boolean shop;
+
+    public UserData(String ID, String pwd, String phone, boolean shop){
+        this.ID=ID;
+        this.pwd=pwd;
+        this.phone=phone;
+        this.shop=shop;
+    }
 
     public UserData(String ID, String pwd){
         this.ID=ID;
