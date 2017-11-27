@@ -51,6 +51,7 @@ public class LoginClient extends Application {
             //receive msg from server
             String check= null;
             check=br.readLine();
+            System.out.println(check);
 
             //Login complete
             if(check.equals("0")){
@@ -122,11 +123,6 @@ public class LoginClient extends Application {
     public void initLoginStage(){
         loginStage= new LoginStage(this);
     }
-    public void initRegisterStage(){
-        registerStage= new RegisterStage(this);
-    }
-
-
     /** return Each Stage**/
     public LoginStage getLoginStage(){
         return loginStage;

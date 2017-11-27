@@ -157,7 +157,7 @@ class LoginThread extends Thread{
     public void saveMemInfo(String ID, String phoneNumber,String shop){
 
 
-        String filename = getClass().getResource("").getPath()+"/MemberInfo/"+ID+".txt";
+        String filename = getClass().getResource("").getPath()+ID+".txt";
         try{
 
             BufferedWriter fw= new BufferedWriter(new FileWriter((filename)));

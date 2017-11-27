@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -19,7 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,8 +29,10 @@ public class RegisterController{
     private RadioButton radioBtn1, radioBtn2;
     @FXML private TextField id_field, pwd_field, phone_field;
     @FXML
-    private Button cancelBtn, creatBtn;
+    private Button cancelBtn, createBtn;
     @FXML private AnchorPane register;
+
+    Alert alert;
 
 
     private LoginClient loginClient;
@@ -78,6 +79,10 @@ public class RegisterController{
     @FXML
     public void handleCreateBtn_r(ActionEvent event){
 
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(loginClient.getClient().getLoginSock().getInputStream()));
+        }catch(Exception e){e.printStackTrace();}
         sendData(id_field.getText());//send id
         sendData(pwd_field.getText());//send pwd
         sendData(phone_field.getText());//send phone
@@ -86,8 +91,22 @@ public class RegisterController{
             sendData("false");
         else if(radioBtn2.isSelected())
             sendData("true");
+
+
         // change to login view
-        handleCancel_r(event);
+
+        try{
+            alert= new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Look!");
+            alert.setContentText(br.readLine());
+            alert.showAndWait();
+
+            StackPane root=(StackPane)createBtn.getScene().getRoot();
+            root.getChildren().remove(register);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //handleCancel_r(event);
     }
 
 }

@@ -5,10 +5,12 @@ import java.net.Socket;
 
 public class Client {
 
-    public final int LoginPort=12345;
+   // public final int LoginPort=12345;
+    public final int MainPort=23456;
     public final int StorePort=34343;
     public final int ImgPort=45454;
     public final int commentPort=56565;
+
     public final String ServIP="127.0.0.1";
     public boolean loginComplete=false;
 
