@@ -73,15 +73,6 @@ public class LoginClient extends Application {
         }
     }
 
-    public void saveNew_member(UserData data){
-        sendData("0");//send Register signal
-        sendData(data.getID());
-        sendData(data.getPwd());
-        sendData(data.getPhone());
-        String shop="false";
-        if(data.isShop()==true)shop="true";
-        sendData(shop);
-    }
 
     /** Send data to Server **/
     public void sendData(String str){

@@ -132,6 +132,7 @@ class MainThread extends Thread{
     public void run(){
         name= recvData();
         this.clientSock_list.put(name,sock);
+        System.out.println(name);
 
         sendStoreList();
         sendClientSocketList();

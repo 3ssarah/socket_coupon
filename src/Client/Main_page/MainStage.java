@@ -24,6 +24,7 @@ public class MainStage extends Stage {
             Scene s= new Scene(main);
             setScene(s);
             show();
+
         }catch(Exception e){
             e.printStackTrace();
             System.exit(0);

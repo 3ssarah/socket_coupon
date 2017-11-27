@@ -18,7 +18,7 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="45.0" layoutY="75.0" prefHeight="440.0" prefWidth="656.0" />
+                  <ListView fx:id="listView" layoutX="45.0" layoutY="75.0" prefHeight="440.0" prefWidth="656.0" />
                   <TextField layoutX="221.0" layoutY="46.0" prefHeight="23.0" prefWidth="376.0" />
                   <Button fx:id="searchBtn" layoutX="606.0" layoutY="46.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="96.0" text="Search" />
                   <Label layoutX="131.0" layoutY="47.0" text="Location:">

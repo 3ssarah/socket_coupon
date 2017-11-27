@@ -2,12 +2,15 @@ package Client.Login;
 
 import Client.Client;
 import Client.Main_page.MainClient;
+import Client.Main_page.MainController;
 import Client.Register.RegisterController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
@@ -24,7 +27,6 @@ import java.util.ResourceBundle;
 public class LoginController  {
 
     /**Login Frame**/
-   //Client.Login Frame
     @FXML private Button login, create;
     @FXML private TextField id_f, pwd_f;
     /**Alert*/
@@ -33,6 +35,7 @@ public class LoginController  {
 
     private static LoginController controller;
     private static RegisterController con;
+    private static MainController mainCon;
     // 로그인 애플리케이션 참조
     private  LoginClient loginClient;
 
@@ -90,13 +93,14 @@ public class LoginController  {
                 loginClient.getClient().getData().setPwd(pwd);
                 loginClient.getClient().loginComplete=true;
 
-            //여기서 현재화면 죽이고
-
-               //oginClient.getClient().getLoginSock().close();
-                //새로운 화면 띄우기
+                //여기서 현재화면 죽이고
+                Stage stage=(Stage)login.getScene().getWindow();
+                stage.close();
+                //loginClient.getClient().getLoginSock().close();
+                // 새로운 화면 띄우기
                 new MainClient(loginClient);
-                System.out.println("login complete3");
-                loginClient.getPrimaryStage().hide();
+
+
             }
             else if(check.equals("-1"))System.out.println("Unless get check!");
             else System.out.println(check.toString());
@@ -125,6 +129,8 @@ public class LoginController  {
 //            Scene s= new Scene(register);
 //            Stage primary= (Stage)create.getScene().getWindow();
 //            primary.setScene(s);
+
+
             StackPane root=(StackPane)create.getScene().getRoot();
             root.getChildren().add(register);
 
@@ -137,61 +143,40 @@ public class LoginController  {
 
 
     }
-//    @FXML
-//    public void handleCancel_r(ActionEvent event){
-//        // /if Cancel button clicked back to LoginView
-//        try{
-//
-//            StackPane root=(StackPane)cancelBtn.getScene().getRoot();
-//            root.getChildren().remove(register);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
-//    @FXML
-//    public void handleCreateBtn_r(ActionEvent event){
-//
-//        String id=id_field.getText();
-//        String pw= pwd_field.getText();
-//        String phone=phone_field.getText();
-//        boolean shop= false;
-//       if(radioBtn2.isSelected())shop=true;
-//
-//       UserData data= new UserData(id,pw,phone, shop);
-//        getController().loginClient.saveNew_member(data);
-//
-////       loginClient.sendData("0");// send register signal
-////       loginClient.sendData(id);
-////       loginClient.sendData(pw);
-////       loginClient.sendData(phone);
-////       loginClient.sendData(shop);
-//
-//
-////        sendData(id_field.getText());//send id
-////        sendData(pwd_field.getText());//send pwd
-////        sendData(phone_field.getText());//send phone
-////
-////        if(radioBtn1.isSelected())
-////            sendData("false");
-////        else if(radioBtn2.isSelected())
-////            sendData("true");
-//        // change to login view
-//        handleCancel_r(event);
-//    }
+
     public void sendData(String str){
         PrintWriter pw = null;
 
         try{
 
             Client tempC= loginClient.getClient();
-            if(tempC.getLoginSock().isConnected())System.out.println("연결되어있음");
+           // if(tempC.getLoginSock().isConnected())System.out.println("연결되어있음");
             pw = new PrintWriter(tempC.getLoginSock().getOutputStream(),true);
             pw.println(str);  //send string data
         }catch(IOException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
+//    private Parent replaceSceneContent(String fxml) throws Exception {
+//        FXMLLoader loader= new FXMLLoader();
+//        Parent page=(Parent)loader.load(getClass().getResource(fxml), null, new JavaFXBuilderFactory()) ;
+//        mainCon =loader.<MainController>getController();
+//        mainCon.setMainClient(new MainClient(loginClient));
+//
+//        //Parent page = (Parent) FXMLLoader.load(getClass().getResource(fxml), null, new JavaFXBuilderFactory());
+//        Scene scene = loginClient.getPrimaryStage().getScene();
+//
+//        if (scene == null) {
+//            scene = new Scene(page, 700, 450);
+//            scene.getStylesheets().add(getClass().getResource("RootLayout.fxml").toExternalForm());
+//            loginClient.getPrimaryStage().setScene(scene);
+//        } else {
+//            loginClient.getPrimaryStage().getScene().setRoot(page);
+//        }
+//        loginClient.getPrimaryStage().sizeToScene();
+//
+//        return page;
+//    }
 
 
 

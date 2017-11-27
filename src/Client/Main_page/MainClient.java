@@ -15,16 +15,18 @@ public class MainClient  {
     private MainStage mainStage;
 
     public MainClient(LoginClient client){
+
         this.client=client.getClient();
 
         try{
             client.getClient().setLoginSock(new Socket(client.getClient().ServIP, client.getClient().MainPort));
-        }catch(Exception e){e.printStackTrace();
+        }catch(Exception e){e.printStackTrace();}
         //send user id
             sendData(this.client.getData().getID());
+            System.out.println("Data sent");
             initMainStage();
 
-        }
+
     }
     /* send Data */
     public void sendData(String str){
