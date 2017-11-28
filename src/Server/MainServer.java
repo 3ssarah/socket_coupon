@@ -6,6 +6,7 @@ import Client.Store.Store;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -63,13 +64,22 @@ class MainThread extends Thread{
             String storeCategory= br.readLine();
             String storeLocation= br.readLine();
             String storePhone= br.readLine();
+            /**save into a file*/
+            String filename= getClass().getResource("").getPath()+name+storeName+".txt";
+            BufferedWriter fw= new BufferedWriter(new FileWriter(filename));
+            fw.write(storeCategory);
+            fw.write(storeLocation);
+            fw.write(storePhone);
+            fw.close();
             /**make Store Object*/
             myStore= new Store(storeName,storeCategory,storePhone,storeLocation);
             this.storeList.add(myStore);
+            pw.println("Store Register Complete");
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+
     /**Enter Store*/
     public void enterStore(){
         Iterator it = this.storeList.iterator();

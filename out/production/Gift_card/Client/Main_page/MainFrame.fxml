@@ -64,7 +64,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button layoutX="631.0" layoutY="38.0" mnemonicParsing="false" text="Detail" />
+                  <Button fx:id="modifyBtn" onAction="#modifyStore" layoutX="631.0" layoutY="38.0" mnemonicParsing="false" text="Modify" />
                   <Label layoutX="163.0" layoutY="36.0" prefHeight="27.0" prefWidth="419.0" text="NAME">
                      <font>
                         <Font name="Arial Bold Italic" size="24.0" />
@@ -79,9 +79,9 @@
                         <TableColumn prefWidth="135.0" text="Date" />
                     </columns>
                   </TableView>
-                  <Button layoutX="644.0" layoutY="465.0" mnemonicParsing="false" text="Add Event" />
-                  <Button layoutX="556.0" layoutY="465.0" mnemonicParsing="false" text="Add Menu" />
-                  <Button layoutX="468.0" layoutY="465.0" mnemonicParsing="false" text="See Menu" />
+                  <Button fx:id="addEventBtn" layoutX="644.0" layoutY="465.0" mnemonicParsing="false" text="Add Event" />
+                  <Button fx:id="addMenuBtn" layoutX="556.0" layoutY="465.0" mnemonicParsing="false" text="Add Menu" />
+                  <Button fx:id="seeMenuBtn" layoutX="468.0" layoutY="465.0" mnemonicParsing="false" text="See Menu" />
                </children></AnchorPane>
          </content>
       </Tab>

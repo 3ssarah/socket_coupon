@@ -27,7 +27,8 @@ import java.util.ResourceBundle;
 public class LoginController  {
 
     /**Login Frame**/
-    @FXML private Button login, create;
+    @FXML
+    private Button login, create;
     @FXML private TextField id_f, pwd_f;
     /**Alert*/
     Alert alert;
@@ -53,9 +54,6 @@ public class LoginController  {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-
-
-
     }
 
     @FXML

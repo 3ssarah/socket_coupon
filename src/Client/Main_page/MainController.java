@@ -1,13 +1,18 @@
 package Client.Main_page;
 
-import Client.Store.Store;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +23,14 @@ import java.util.ResourceBundle;
 
 public class MainController {
     private static MainController controller;
+    private static DialogController dialogCon;
+    /**tab: stores*/
     @FXML private ListView<String> listView;
+
+    /**tab: my_page*/
+
+    /**tab: setting*/
+    @FXML private Button modifyBtn, addEventBtn, addMenuBtn, seeMenuBtn;
 
 
     /**Main application (MainClient)참조*/
@@ -57,6 +69,44 @@ public class MainController {
     /** Third tab: setting_tab Event Handler **/
 
     /** First tab: stores_tab Event Handler functions **/
+
+    public void modifyStore(ActionEvent  event){
+
+
+        try{
+            mainClient.sendData("1");//send signal add store
+            Stage dialog= new Stage();
+            dialog.initOwner(mainClient.getPrimaryStage());
+            dialog.setTitle("Add Store");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("StoreDialogFrame.fxml"));
+            Parent parent= loader.load();
+
+            dialogCon= loader.<DialogController>getController();
+            dialogCon.setMainClient(mainClient);
+
+            Scene s = new Scene(parent);
+            dialog.setScene(s);
+            dialog.setResizable(false);
+            dialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    /** add store*/
+    public void addStore(String name, String category, String location, String phone){
+        //send store basic information
+        pw.println(name);
+        pw.println(category);
+        pw.println(location);
+        pw.println(phone);
+    }
 
     /** recv Store list*/
     public void recvStoreList(){

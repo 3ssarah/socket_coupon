@@ -13,9 +13,11 @@ public class MainClient  {
 
     private Client client;
     private MainStage mainStage;
+    private Stage primaryStage;
 
     public MainClient(LoginClient client){
 
+        this.primaryStage= client.getPrimaryStage();
         this.client=client.getClient();
 
         try{
@@ -28,6 +30,31 @@ public class MainClient  {
 
 
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public MainStage getMainStage() {
+        return mainStage;
+    }
+
+    public void setMainStage(MainStage mainStage) {
+        this.mainStage = mainStage;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     /* send Data */
     public void sendData(String str){
         PrintWriter pw = null;
