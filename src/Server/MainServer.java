@@ -6,10 +6,34 @@ import Client.Store.Store;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
+class StoreInfo{
+    private Hashtable<String, String> storeInfo =null; //store information <name, location>
+    final private String fileName_store=getClass().getResource("").getPath()+"sotre_info.txt";
+
+    public StoreInfo(){
+        storeInfo= new Hashtable<String, String>();
+
+        try{
+            hashMake();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void hashMake()throws IOException{
+        BufferedReader br= new BufferedReader(new FileReader(fileName_store));
+        String store_name;
+        String store_location;
+
+        while((store_name=br.readLine())!=null){
+            store_location=br.readLine();
+            storeInfo.put(store_name, store_location);
+        }
+    }
+}
 
 class MainThread extends Thread{
 
@@ -21,14 +45,12 @@ class MainThread extends Thread{
     Socket sock =null;
     String name=null;
     Store myStore= null;
+    private StoreInfo stores;
 
-    /**Search Client Variables*/
-    String s_ID= new String();
-    String s_phone= new String();
-    String s_shop=new String();
 
-    public MainThread(Socket sock,ArrayList<Store> storeList,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
+    public MainThread(Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
         this.sock=sock;
+        this.stores=stores;
         this.clientSock_list=clientSock_list;
         this.storeList=storeList;
         this.clientInfoList = clientInfoList;
@@ -71,6 +93,7 @@ class MainThread extends Thread{
             fw.write(storeLocation);
             fw.write(storePhone);
             fw.close();
+
             /**make Store Object*/
             myStore= new Store(storeName,storeCategory,storePhone,storeLocation);
             this.storeList.add(myStore);
@@ -114,6 +137,7 @@ class MainThread extends Thread{
             sendData(temp.getLocation());
             sendData(temp.getCategory());
         }
+        sendData("-1");
     }
     /** Send client List*/
     public void sendClientSocketList(){
@@ -126,18 +150,12 @@ class MainThread extends Thread{
         }
         sendData("-1");
     }
-    /**Load Client info*/
+    /** Search Store by location*/
+    public void sendSearchedStoreList(){
+        String s_location=recvData();
 
-    public void loadClient(){
-        BufferedReader br=null;
-        try{
-            br= new BufferedReader(new FileReader(this.s_ID+".txt"));
-            this.s_phone=br.readLine();
-            this.s_shop=br.readLine();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
     }
+
 
     public void run(){
         name= recvData();
@@ -171,16 +189,7 @@ class MainThread extends Thread{
                 case 3:
                   enterStore();
                   break;
-                case 4://search other client
-                    this.s_ID=recvData();
-                    loadClient();
 
-                    pw.println(s_phone);
-                    pw.println(s_shop);
-                    this.s_ID=null;
-                    this.s_shop=null;
-                    this.s_shop=null;
-                    break;
             }
         }
     }
@@ -193,6 +202,7 @@ public class MainServer{
         ArrayList<Store> storeList= new ArrayList<Store>();
         Hashtable<String, Socket> clientSocket_list= new Hashtable<String, Socket>();
         ArrayList<Client> clientInfoList = new ArrayList<Client>();
+        StoreInfo stores= new StoreInfo();
         ServerSocket server=null;
         Socket socket=null;
 
@@ -202,7 +212,7 @@ public class MainServer{
                 System.out.println("..Main Server Waiting...");
                 socket=server.accept();
 
-                new MainThread(socket,storeList,clientSocket_list,clientInfoList).start();
+                new MainThread(socket,stores,storeList,clientSocket_list,clientInfoList).start();
             }
         }catch (IOException e){
             e.printStackTrace();

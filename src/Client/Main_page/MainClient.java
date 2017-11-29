@@ -5,7 +5,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import Client.Client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -21,12 +23,14 @@ public class MainClient  {
         this.client=client.getClient();
 
         try{
-            client.getClient().setLoginSock(new Socket(client.getClient().ServIP, client.getClient().MainPort));
+            this.client.setLoginSock(new Socket(client.getClient().ServIP, client.getClient().MainPort));
         }catch(Exception e){e.printStackTrace();}
         //send user id
             sendData(this.client.getData().getID());
             System.out.println("Data sent");
-            initMainStage();
+           initMainStage();
+        System.out.println("initMAinstage");
+
 
 
     }
@@ -51,10 +55,6 @@ public class MainClient  {
         return primaryStage;
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
     /* send Data */
     public void sendData(String str){
         PrintWriter pw = null;
@@ -65,8 +65,21 @@ public class MainClient  {
            e.printStackTrace();
         }
     }
+    /**recv data*/
+    public String recvData(){
+        String result = null;
+        BufferedReader br=null;
+        try{
+            br= new BufferedReader(new InputStreamReader(this.client.getLoginSock().getInputStream()));
+            result=br.readLine();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
     public void initMainStage(){
-        mainStage= new MainStage(this);
+        mainStage= new MainStage(this.client,this);
     }
 
 

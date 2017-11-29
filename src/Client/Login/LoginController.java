@@ -94,9 +94,12 @@ public class LoginController  {
                 //여기서 현재화면 죽이고
                 Stage stage=(Stage)login.getScene().getWindow();
                 stage.close();
-                //loginClient.getClient().getLoginSock().close();
-                // 새로운 화면 띄우기
+
+
                 new MainClient(loginClient);
+
+
+
 
 
             }
@@ -152,6 +155,26 @@ public class LoginController  {
             pw = new PrintWriter(tempC.getLoginSock().getOutputStream(),true);
             pw.println(str);  //send string data
         }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void changeStage(){
+
+        try{
+        Stage stage= new Stage();
+        stage.setTitle("Main Page");
+
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("MainFrame.fxml"));
+        Parent parent= loader.load();
+
+        mainCon= loader.<MainController>getController();
+        mainCon.setMainClient(new MainClient(loginClient));
+
+        Scene s=new Scene(parent);
+        stage.setResizable(false);
+        stage.show();
+
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

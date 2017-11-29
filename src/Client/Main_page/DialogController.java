@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import Client.Client;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -23,15 +24,15 @@ public class DialogController {
 
     Alert alert;
 
-    private MainClient mainClient;
+    private Client client;
 
     @FXML public void initialize(URL location, ResourceBundle resources){
     }
-    public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
+    public void setClient(Client  client){this.client=client;}
     public void sendData(String str){
         PrintWriter pw= null;
         try{
-            pw= new PrintWriter(mainClient.getClient().getLoginSock().getOutputStream(),true);
+            pw= new PrintWriter(client.getLoginSock().getOutputStream(),true);
             pw.println(str);
         }catch(Exception e){
             e.printStackTrace();
@@ -41,7 +42,7 @@ public class DialogController {
     public void handleOk(ActionEvent event){
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(mainClient.getClient().getLoginSock().getInputStream()));
+            br = new BufferedReader(new InputStreamReader(client.getLoginSock().getInputStream()));
         }catch(Exception e){e.printStackTrace();}
 
         sendData(name_f.getText());

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="443.0" fitWidth="267.0" layoutX="53.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="55.0" layoutY="29.0" text="Download Gift-card and Share!">
+         <font>
+            <Font name="Arial Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="61.0" layoutY="485.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="264.0" text="Download" />
+      <ImageView fitHeight="385.0" fitWidth="291.0" layoutX="45.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

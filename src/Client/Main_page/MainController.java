@@ -1,6 +1,7 @@
 package Client.Main_page;
 
 
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,58 +9,69 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import Client.Client;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController {
-    private static MainController controller;
-    private static DialogController dialogCon;
-    /**tab: stores*/
-    @FXML private ListView<String> listView;
+public class MainController  {
 
+   private static MainController controller;
+    private static DialogController dialogCon;
+    private ArrayList<String> clientList=null;
+
+    /**tab: stores*/
+    @FXML private ListView<String> listViewBox;
+    @FXML private Button searchBtn;
+    ObservableList<String> storelist= FXCollections.observableArrayList();
     /**tab: my_page*/
 
     /**tab: setting*/
     @FXML private Button modifyBtn, addEventBtn, addMenuBtn, seeMenuBtn;
 
 
-    /**Main application (MainClient)참조*/
+    /**Client 참조*/
+    private Client client;
     private MainClient mainClient;
 
-    /****************************/
-    private BufferedReader br=null;
-    private PrintWriter pw= null;
-    ObservableList<String> storelist= FXCollections.observableArrayList();
-    private ArrayList<String> clientList=null;
-
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
-    public MainController(){
-        controller=this;
-    }
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    public void setClient(Client client){this.client=client;}
+    public MainController(){controller=this;}
+//    public MainController(){
+//
+//        recvStoreList();
+//        recvClientList();
+//        listViewBox.setItems(storelist);
+//        listViewBox.getSelectionModel().selectedItemProperty().addListener(
+//                new ChangeListener<String>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//
+//
+//                    }
+//                }
+//        );
+//    }
+    @FXML public void initialize(URL location, ResourceBundle resources) {
 
+        System.out.println("initialize--");
         /** First tab: stores_tab Event Handler **/
-        listView.setItems(storelist);
-        listView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
+        recvStoreList();
+        recvClientList();
 
-                    }
-                }
-        );
+        listViewBox.setItems(storelist);
+
 
     }
 
@@ -74,7 +86,7 @@ public class MainController {
 
 
         try{
-            mainClient.sendData("1");//send signal add store
+            sendData("1");//send signal add store
             Stage dialog= new Stage();
             dialog.initOwner(mainClient.getPrimaryStage());
             dialog.setTitle("Add Store");
@@ -83,7 +95,7 @@ public class MainController {
             Parent parent= loader.load();
 
             dialogCon= loader.<DialogController>getController();
-            dialogCon.setMainClient(mainClient);
+            dialogCon.setClient(client);
 
             Scene s = new Scene(parent);
             dialog.setScene(s);
@@ -102,28 +114,36 @@ public class MainController {
     /** add store*/
     public void addStore(String name, String category, String location, String phone){
         //send store basic information
-        pw.println(name);
-        pw.println(category);
-        pw.println(location);
-        pw.println(phone);
+        sendData(name);
+       sendData(category);
+        sendData(location);
+        sendData(phone);
     }
 
-    /** recv Store list*/
-    public void recvStoreList(){
-        String temp="0";
-        ArrayList<String> templist= new ArrayList<String>();
-        while(true){
-            temp=recvData();
-            if(temp.equals("-1"))break;
-            templist.add(temp);
-        }
-        String name= "["+templist.get(3)+"]["+templist.get(2)+"] "+templist.get(0);
+    /** recv Store list__signal:0*/
+    public void recvStoreList() {
+        sendData("0");
+        String temp = "0";
+
+        ArrayList<String> templist = new ArrayList<String>();
+        while (true) {
+            for(int i=0; i<3; i++){
+                temp = recvData();
+                if (temp.equals("-1")) break;
+                templist.add(temp);
+            }
+        if(temp.equals("-1"))break;
+
+        String name = "[" + templist.get(3) + "][" + templist.get(2) + "] " + templist.get(0);
         System.out.println(name);
         storelist.add(name);
         templist.clear();
+        }
+        templist.clear();
     }
-    /**recv Client list*/
+    /**recv Client list __signal:0*/
     public void recvClientList() {
+        sendData("0");
         this.clientList = new ArrayList<String>();
         String temp = "0";
 
@@ -147,13 +167,20 @@ public class MainController {
 
     /** send Data */
     public void sendData(String str){
-        this.pw.println(str);
+
+        PrintWriter pw= null;
+        try{
+            pw= new PrintWriter(client.getLoginSock().getOutputStream(),true);
+            pw.println(str);
+        }catch(Exception e){e.printStackTrace();}
     }
     /** receive Data */
     public String recvData(){
         String result = null;
+        BufferedReader br=null;
         try{
-            result = br.readLine();
+            br= new BufferedReader(new InputStreamReader(client.getLoginSock().getInputStream()));
+            result=br.readLine();
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
