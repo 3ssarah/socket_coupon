@@ -25,8 +25,12 @@ public class StoreController {
 
     /**client 참조*/
     private MainClient mainClient;
+    /**store 참조*/
+    private Store store=null;
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
+    public void setStore(Store store){this.store=store;}
     public StoreController(){
+
     }
     public void handleMenuBtn(ActionEvent event){
 

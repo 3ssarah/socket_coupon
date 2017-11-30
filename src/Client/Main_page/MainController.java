@@ -2,6 +2,8 @@ package Client.Main_page;
 
 
 
+import Client.Store.Store;
+import Client.Store.StoreController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,9 +28,7 @@ import java.util.ResourceBundle;
 
 public class MainController  /*implements Initializable*/  {
 
-   private static MainController controller;
-    private static DialogController dialogCon;
-    private ArrayList<String> clientList=null;
+
 
     /**tab: stores*/
     @FXML private ListView<String> listViewBox;
@@ -40,9 +40,13 @@ public class MainController  /*implements Initializable*/  {
     @FXML private Button modifyBtn, addEventBtn, addMenuBtn, seeMenuBtn;
 
 
-    /**Client 참조*/
+    /**참조하기 위한 객체*/
     private Client client;
     private MainClient mainClient;
+    private static MainController controller;
+    private static DialogController dialogCon;
+    private static StoreController storeCon;
+    private ArrayList<String> clientList=null;
 
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
     public void setClient(Client client){this.client=client;}
@@ -125,6 +129,7 @@ public class MainController  /*implements Initializable*/  {
         sendData("0");
         String temp = "0";
 
+        storelist.clear();
         while ((temp=recvData()).equals("-1")!=true) {
             storelist.add(temp);
         }
@@ -132,9 +137,46 @@ public class MainController  /*implements Initializable*/  {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
+
+                sendData("5");//ask server to send specific store's information
+                Store  searched= recvInformation(newValue);
+                Stage storepage= new Stage();
+                storepage.initOwner(mainClient.getPrimaryStage());
+                storepage.setTitle(searched.getStore_name()+"store page");
+
+                try{
+                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+                    Parent parent= loader.load();
+
+                    storeCon= loader.<StoreController>getController();
+                    storeCon.setMainClient(mainClient);
+                    storeCon.setStore(searched);
+
+                    Scene s= new Scene(parent);
+                    storepage.setScene(s);
+                    storepage.show();
+
+
+                }catch(Exception e){e.printStackTrace();}
+
             }
         });
 
+    }
+    /**recv specific store information*/
+    public Store recvInformation(String name){
+        System.out.println(" recvInformation function");
+        sendData(name);
+        System.out.println(" sendData pass");
+        String t_name, t_category, t_phone,t_location, t_owner;
+        t_name=recvData();
+        t_category=recvData();
+        t_phone=recvData();
+        t_location=recvData();
+        t_owner=recvData();
+        System.out.println(t_name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
+        Store tempStore= new Store(t_name, t_category, t_phone,t_location, t_owner);
+        return  tempStore;
     }
     /**recv Client list __signal:0*/
     public void recvClientList() {

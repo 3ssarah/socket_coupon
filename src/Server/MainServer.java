@@ -61,7 +61,6 @@ class StoreInfo{
 
 class MainThread extends Thread{
 
-    int flag;
     ArrayList<Store>storeList=null;
     Hashtable<String, Socket>clientSock_list=null;
     ArrayList<Client> clientInfoList = null;
@@ -72,9 +71,16 @@ class MainThread extends Thread{
     Store myStore= null;
     private StoreInfo stores;
 
+    /** For Searching specific Store Variables*/
+    String s_name= new String();
+    String s_location= new String();
+    String s_category= new String();
+    String s_owner= new String();
+    String s_phone= new String();
 
-    public MainThread(int flag,Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
-        this.flag=flag;
+
+    public MainThread(Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
+
         this.sock=sock;
         this.stores=stores;
         this.clientSock_list=clientSock_list;
@@ -188,42 +194,28 @@ class MainThread extends Thread{
         }
         sendData("-1");
     }
-    /**Load store information to MainServer*/
-    public void loadStorestoServer(){
 
-        System.out.println("loadStorestoServer function!");
-        String fileName= getClass().getResource("").getPath();
-        try {
-            BufferedReader fr = new BufferedReader(new FileReader(stores.getFileName_store()));
-            String store_name,owner,store_location, store_phone,store_category;
 
-            while((store_name=fr.readLine())!=null){
-
-                fr.readLine();//location of store
-
-                BufferedReader tempBr= new BufferedReader(new FileReader(fileName+store_name+".txt"));
-                owner=tempBr.readLine();
-                store_category=tempBr.readLine();
-                store_location=tempBr.readLine();
-                store_phone=tempBr.readLine();
-
-                System.out.println(store_name+" "+store_category+" "+store_location+" "+store_phone+" "+owner);
-                Store tempStore= new Store(store_name,store_category,store_phone,store_location,owner);
-                storeList.add(tempStore);
-                System.out.println("store list added");
-
-                tempBr.close();
-            }
-            fr.close();
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
     /** Search Store by location*/
     public void sendSearchedStoreList(){
         String s_location=recvData();
 
+        BufferedReader tempbr= null;
+
+        try{
+            tempbr= new BufferedReader(new FileReader(getClass().getResource("").getPath()+this.s_name+".txt"));
+            this.s_owner=tempbr.readLine();
+            this.s_category=tempbr.readLine();
+            this.s_location=tempbr.readLine();
+            this.s_phone=tempbr.readLine();
+
+            pw.println(this.s_name);
+            pw.println(this.s_category);
+            pw.println(this.s_phone);
+            pw.println(this.s_location);
+            pw.println(this.s_owner);
+
+        }catch(Exception e){e.printStackTrace();}
     }
 
 
@@ -232,11 +224,7 @@ class MainThread extends Thread{
         name= recvData();
         this.clientSock_list.put(name,sock);
         System.out.println(name);
-        if(flag==0){
-            /**서버가 처음으로 켜졌을 때만 불려지게...?*/
-            loadStorestoServer();
-            flag++;
-        }
+
 
 //        sendStoreList();
 //        sendClientSocketList();
@@ -271,6 +259,23 @@ class MainThread extends Thread{
                 case 4:
                     System.out.println("only sendCliemtSocketList");
                     sendClientSocketList();
+                    break;
+                case 5: //search specific store
+                    System.out.println("send searched store data");
+                    this.s_name=recvData();
+                    sendSearchedStoreList();
+
+//                    pw.println(this.s_name);
+//                    pw.println(this.s_category);
+//                    pw.println(this.s_phone);
+//                    pw.println(this.s_location);
+//                    pw.println(this.s_owner);
+                    this.s_phone=null;
+                    this.s_location=null;
+                    this.s_phone=null;
+                    this.s_category=null;
+                    this.s_owner=null;
+                    break;
 
             }
         }
@@ -287,17 +292,48 @@ public class MainServer{
         StoreInfo stores= new StoreInfo();
         ServerSocket server=null;
         Socket socket=null;
-        int flag=0;
+
 
         try{
             server= new ServerSocket(23456);
+
+            /**Load store information to MainServer*/
+            System.out.println("loadStorestoServer function!");
+            String fileName= MainServer.class.getResource("").getPath();
+            try {
+                BufferedReader fr = new BufferedReader(new FileReader(stores.getFileName_store()));
+                String store_name,owner,store_location, store_phone,store_category;
+
+                while((store_name=fr.readLine())!=null){
+
+                    fr.readLine();//location of store
+
+                    BufferedReader tempBr= new BufferedReader(new FileReader(fileName+store_name+".txt"));
+                    owner=tempBr.readLine();
+                    store_category=tempBr.readLine();
+                    store_location=tempBr.readLine();
+                    store_phone=tempBr.readLine();
+
+                    System.out.println(store_name+" "+store_category+" "+store_location+" "+store_phone+" "+owner);
+                    Store tempStore= new Store(store_name,store_category,store_phone,store_location,owner);
+                    storeList.add(tempStore);
+                    System.out.println("store list added");
+
+                    tempBr.close();
+                }
+                fr.close();
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             while(true){
                 System.out.println("..Main Server Waiting...");
                 socket=server.accept();
 
 
 
-                new MainThread(flag,socket,stores,storeList,clientSocket_list,clientInfoList).start();
+
+                new MainThread(socket,stores,storeList,clientSocket_list,clientInfoList).start();
             }
         }catch (IOException e){
             e.printStackTrace();
