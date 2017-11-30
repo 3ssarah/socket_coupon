@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController  {
+public class MainController  /*implements Initializable*/  {
 
    private static MainController controller;
     private static DialogController dialogCon;
@@ -46,22 +46,12 @@ public class MainController  {
 
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
     public void setClient(Client client){this.client=client;}
-    public MainController(){controller=this;}
-//    public MainController(){
-//
-//        recvStoreList();
-//        recvClientList();
-//        listViewBox.setItems(storelist);
-//        listViewBox.getSelectionModel().selectedItemProperty().addListener(
-//                new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//
-//
-//                    }
-//                }
-//        );
-//    }
+    public MainController(){
+        System.out.println("MainController COnstructor");
+        controller=this;
+
+    }
+
     @FXML public void initialize(URL location, ResourceBundle resources) {
 
         System.out.println("initialize--");
@@ -73,6 +63,15 @@ public class MainController  {
         listViewBox.setItems(storelist);
 
 
+    }
+    /** First tab: stores_tab Event Handler **/
+
+    public void handleSearch(ActionEvent event){
+        System.out.println("handleSearch Function");
+        recvStoreList();
+        //recvClientList();
+
+        listViewBox.setItems(storelist);
     }
 
 
@@ -129,21 +128,24 @@ public class MainController  {
         while (true) {
             for(int i=0; i<3; i++){
                 temp = recvData();
+                System.out.println(temp);
                 if (temp.equals("-1")) break;
-                templist.add(temp);
+                templist.add(i,temp);
             }
+
         if(temp.equals("-1"))break;
 
-        String name = "[" + templist.get(3) + "][" + templist.get(2) + "] " + templist.get(0);
+        String name = "[" + templist.get(2) + "][" + templist.get(1) + "] " + templist.get(0);
         System.out.println(name);
         storelist.add(name);
         templist.clear();
+        System.out.println("templist cleared");
         }
         templist.clear();
     }
     /**recv Client list __signal:0*/
     public void recvClientList() {
-        sendData("0");
+        sendData("4");
         this.clientList = new ArrayList<String>();
         String temp = "0";
 

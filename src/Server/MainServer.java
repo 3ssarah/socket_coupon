@@ -12,8 +12,12 @@ import java.util.Iterator;
 
 class StoreInfo{
     private Hashtable<String, String> storeInfo =null; //store information <name, location>
-    final private String fileName_store=getClass().getResource("").getPath()+"sotre_info.txt";
+    final private String fileName_store=getClass().getResource("").getPath()+"store_info.txt";
 
+//    public Hashtable<String, String> getStoreInfo(){
+//        return this.storeInfo;
+//    }
+    public String getFileName_store(){return fileName_store;}
     public StoreInfo(){
         storeInfo= new Hashtable<String, String>();
 
@@ -24,14 +28,34 @@ class StoreInfo{
         }
     }
     public void hashMake()throws IOException{
+
         BufferedReader br= new BufferedReader(new FileReader(fileName_store));
         String store_name;
         String store_location;
 
         while((store_name=br.readLine())!=null){
+
             store_location=br.readLine();
             storeInfo.put(store_name, store_location);
         }
+    }
+    public void InsertStore(String name, String location){
+        storeInfo.put(name, location);    }
+
+    public  void saveFile(){
+        try{
+            FileWriter fw= new FileWriter(fileName_store);
+            Iterator it= storeInfo.keySet().iterator();
+            while(it.hasNext()){
+                String name=(String)it.next();
+                fw.write(name+"\n");
+                fw.write((String)storeInfo.get(name)+"\n");
+            }
+            fw.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
 
@@ -54,6 +78,7 @@ class MainThread extends Thread{
         this.clientSock_list=clientSock_list;
         this.storeList=storeList;
         this.clientInfoList = clientInfoList;
+
 
         try{
             br = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));
@@ -81,27 +106,37 @@ class MainThread extends Thread{
     /** Add Store */
     public void addStore(){
         try{
+            pw.flush();
             /**recv Store information */
             String storeName=br.readLine();
             String storeCategory= br.readLine();
             String storeLocation= br.readLine();
             String storePhone= br.readLine();
+
+            stores.InsertStore(storeName, storeLocation);
+            pw.println("Store Register Complete");
+
             /**save into a file*/
-            String filename= getClass().getResource("").getPath()+name+storeName+".txt";
+            String filename= getClass().getResource("").getPath()+storeName+".txt";
             BufferedWriter fw= new BufferedWriter(new FileWriter(filename));
-            fw.write(storeCategory);
-            fw.write(storeLocation);
-            fw.write(storePhone);
+            fw.write(name+"\n");
+            fw.write(storeCategory+"\n");
+            fw.write(storeLocation+"\n");
+            fw.write(storePhone+"\n");
             fw.close();
 
             /**make Store Object*/
-            myStore= new Store(storeName,storeCategory,storePhone,storeLocation);
+            myStore= new Store(storeName,storeCategory,storePhone,storeLocation,name);
+            System.out.println("add store in to sotre list");
             this.storeList.add(myStore);
-            pw.println("Store Register Complete");
+            System.out.println("add store in to sotre list1");
+            //pw.println("Store Register Complete");
+
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+
 
     /**Enter Store*/
     public void enterStore(){
@@ -150,6 +185,38 @@ class MainThread extends Thread{
         }
         sendData("-1");
     }
+    /**Load store information to MainServer*/
+    public void loadStorestoServer(){
+
+        System.out.println("loadStorestoServer function!");
+        String fileName= getClass().getResource("").getPath();
+        try {
+            BufferedReader fr = new BufferedReader(new FileReader(stores.getFileName_store()));
+            String store_name,owner,store_location, store_phone,store_category;
+
+            while((store_name=fr.readLine())!=null){
+
+                fr.readLine();//location of store
+
+                BufferedReader tempBr= new BufferedReader(new FileReader(fileName+store_name+".txt"));
+                owner=tempBr.readLine();
+                store_category=tempBr.readLine();
+                store_location=tempBr.readLine();
+                store_phone=tempBr.readLine();
+
+                System.out.println(store_name+" "+store_category+" "+store_location+" "+store_phone+" "+owner);
+                Store tempStore= new Store(store_name,store_category,store_location,store_phone,owner);
+                storeList.add(tempStore);
+                System.out.println("store list added");
+
+                tempBr.close();
+            }
+            fr.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     /** Search Store by location*/
     public void sendSearchedStoreList(){
         String s_location=recvData();
@@ -162,12 +229,13 @@ class MainThread extends Thread{
         this.clientSock_list.put(name,sock);
         System.out.println(name);
 
-        sendStoreList();
-        sendClientSocketList();
+//        sendStoreList();
+//        sendClientSocketList();
+        loadStorestoServer();
 
         while(true){
             int situation = Integer.parseInt(recvData());
-
+            System.out.println(situation+"recved");
             switch (situation){
                 case -2: //terminate store
                     deleteStore();
@@ -177,11 +245,13 @@ class MainThread extends Thread{
                     this.clientSock_list.remove(this.name);
                     break;
                 case 0: //refresh
+                    System.out.println("sendStoreList and function");
                     sendStoreList();
-                    sendClientSocketList();
+                    //sendClientSocketList();
                     break;
                 case 1:
                     addStore();
+                    stores.saveFile();
                     break;
                 case 2:
                     exitStore();
@@ -189,6 +259,9 @@ class MainThread extends Thread{
                 case 3:
                   enterStore();
                   break;
+                case 4:
+                    System.out.println("only sendCliemtSocketList");
+                    sendClientSocketList();
 
             }
         }

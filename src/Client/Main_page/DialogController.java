@@ -26,6 +26,7 @@ public class DialogController {
 
     private Client client;
 
+
     @FXML public void initialize(URL location, ResourceBundle resources){
     }
     public void setClient(Client  client){this.client=client;}
@@ -53,7 +54,8 @@ public class DialogController {
         try{
             alert= new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Look!");
-            alert.setContentText(br.readLine());
+            alert.setHeaderText(br.readLine());
+            alert.setContentText(":)");
             alert.showAndWait();
 
 

@@ -121,7 +121,7 @@ class LoginThread extends Thread{
                         pw.println("Registration Complete!");
                     }
                 }
-                //Client.Login
+                //Login
                 else if(mode==1){
                     int result= member.Check(id,pwd);
                     switch(result){
@@ -157,7 +157,7 @@ class LoginThread extends Thread{
     public void saveMemInfo(String ID, String phoneNumber,String shop){
 
 
-        String filename = getClass().getResource("").getPath()+ID+".txt";
+        String filename = getClass().getResource("/MemberIfno").getPath()+ID+".txt";
         try{
 
             BufferedWriter fw= new BufferedWriter(new FileWriter((filename)));

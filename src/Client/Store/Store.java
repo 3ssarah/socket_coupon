@@ -14,16 +14,26 @@ public class Store {
     private String category=null;
     private String location=null;
     private String store_phone=null;
+    private String owner;
     private ArrayList<Socket> customer= null;
 
 
     private Hashtable<Integer, Menu> menu_table=null;
 
-    public Store(String store_name, String category, String store_phone, String location){
+    public Store(String store_name, String category, String store_phone, String location,String owner){
         this.store_name=store_name;
         this.category=category;
         this.store_phone=store_phone;
         this.location=location;
+        this.owner=owner;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getStore_name() {
