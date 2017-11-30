@@ -50,6 +50,7 @@ public class MainController  /*implements Initializable*/  {
         System.out.println("MainController COnstructor");
         controller=this;
 
+
     }
 
     @FXML public void initialize(URL location, ResourceBundle resources) {
@@ -124,18 +125,15 @@ public class MainController  /*implements Initializable*/  {
         sendData("0");
         String temp = "0";
 
-//        ArrayList<String> templist = new ArrayList<String>();
         while ((temp=recvData()).equals("-1")!=true) {
             storelist.add(temp);
-
-
-
-//
-//        String name = "[" + templist.get(2) + "][" + templist.get(1) + "] " + templist.get(0);
-//        System.out.println(name);
-//        storelist.add(name);
-
         }
+        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
+            }
+        });
 
     }
     /**recv Client list __signal:0*/

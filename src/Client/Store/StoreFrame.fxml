@@ -9,34 +9,35 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/8.0.141"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Store.StoreController">
    <children>
       <Button layoutX="623.0" layoutY="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" text="Back" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../IMG/coffee.jpg" />
+            <Image url="" />
          </image>
       </ImageView>
-      <Label layoutX="272.0" layoutY="44.0" prefHeight="27.0" prefWidth="299.0" text="Store Name">
+      <Label fx:id="store_name" layoutX="272.0" layoutY="44.0" prefHeight="27.0" prefWidth="299.0" text="Store Name">
          <font>
             <Font name="Arial Bold Italic" size="24.0" />
          </font>
       </Label>
       <Label layoutX="272.0" layoutY="96.0" text="Location:" />
       <Label layoutX="274.0" layoutY="158.0" prefHeight="15.0" prefWidth="56.0" text="Phone   :" />
-      <Label layoutX="332.0" layoutY="96.0" prefHeight="15.0" prefWidth="173.0" text="address" />
-      <Label layoutX="335.0" layoutY="158.0" prefHeight="15.0" prefWidth="173.0" text="010-1234-5678" />
+      <Label fx:id="addr" layoutX="332.0" layoutY="96.0" prefHeight="15.0" prefWidth="173.0" text="address" />
+      <Label fx:id="phone" layoutX="335.0" layoutY="158.0" prefHeight="15.0" prefWidth="173.0" text="010-1234-5678" />
       <Label layoutX="271.0" layoutY="127.0" text="Category:" />
-      <Label layoutX="336.0" layoutY="127.0" prefHeight="15.0" prefWidth="166.0" text="type" />
-      <TextArea layoutX="52.0" layoutY="476.0" prefHeight="54.0" prefWidth="567.0" />
-      <Button layoutX="622.0" layoutY="476.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="88.0" text="Comment" />
-      <ListView layoutX="53.0" layoutY="347.0" prefHeight="120.0" prefWidth="658.0" />
+      <Label fx:id="type" layoutX="336.0" layoutY="127.0" prefHeight="15.0" prefWidth="166.0" text="type" />
+      <TextArea fx:id="testArea" layoutX="52.0" layoutY="476.0" prefHeight="54.0" prefWidth="567.0" />
+      <Button fx:id="sendBtn" onAction="#handleSendBtn" layoutX="622.0" layoutY="476.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="88.0" text="Comment" />
+      <ListView fx:id="commentListView" layoutX="53.0" layoutY="347.0" prefHeight="120.0" prefWidth="658.0" />
       <Label layoutX="53.0" layoutY="322.0" text="Comment">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="120.0" layoutY="243.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="200.0" text="Menu" />
-      <Button layoutX="405.0" layoutY="243.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="200.0" text="Event" />
+      <Button fx:id="mneuBtn" onAction="#handleMenuBtn" layoutX="120.0" layoutY="243.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="200.0" text="Menu" />
+      <Button fx:id="eventBtn" onAction="#handleEventBtn" layoutX="405.0" layoutY="243.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="200.0" text="Event" />
    </children>
 </Pane>

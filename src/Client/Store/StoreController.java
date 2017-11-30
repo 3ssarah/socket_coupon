@@ -1,4 +1,77 @@
 package Client.Store;
 
+import Client.Main_page.MainClient;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.stage.Stage;
+
 public class StoreController {
+    @FXML
+    private Button menuBtn, eventBtn, sendBtn;
+    @FXML
+    private Label addr, phone, type,store_name;
+    @FXML
+    private ListView commentListView;
+
+    /**Controller for menu and event*/
+    private static EventInfoController eventCon;
+    private static MenuController menuCon;
+
+    /**client 참조*/
+    private MainClient mainClient;
+    public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
+    public StoreController(){
+    }
+    public void handleMenuBtn(ActionEvent event){
+
+        //send specific signal to server
+        Stage menu= new Stage();
+        menu.initOwner(mainClient.getPrimaryStage());
+        menu.setTitle("Menu");
+        try{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("MenuFrame.fxml"));
+            Parent parent = loader.load();
+
+            menuCon= loader.<MenuController>getController();
+            menuCon.setClient(mainClient.getClient());
+
+            Scene s= new Scene(parent);
+            menu.setScene(s);
+            menu.setResizable(false);
+            menu.show();
+
+        }catch (Exception e){e.printStackTrace();}
+
+    }
+    public void handleEventBtn(ActionEvent event){
+
+        //send specific signal to server
+        Stage event_info= new Stage();
+        event_info.initOwner(mainClient.getPrimaryStage());
+        event_info.setTitle("Event");
+        try{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Event_infoFrame.fxml"));
+            Parent parent = loader.load();
+
+            eventCon= loader.<EventInfoController>getController();
+            eventCon.setClient(mainClient.getClient());
+
+            Scene s= new Scene(parent);
+            event_info.setScene(s);
+            event_info.setResizable(false);
+            event_info.show();
+
+        }catch (Exception e){e.printStackTrace();}
+
+
+    }
+    public void handleSendBtn(ActionEvent event){
+
+    }
 }

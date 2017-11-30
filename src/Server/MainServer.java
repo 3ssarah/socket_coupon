@@ -61,6 +61,7 @@ class StoreInfo{
 
 class MainThread extends Thread{
 
+    int flag;
     ArrayList<Store>storeList=null;
     Hashtable<String, Socket>clientSock_list=null;
     ArrayList<Client> clientInfoList = null;
@@ -72,7 +73,8 @@ class MainThread extends Thread{
     private StoreInfo stores;
 
 
-    public MainThread(Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
+    public MainThread(int flag,Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
+        this.flag=flag;
         this.sock=sock;
         this.stores=stores;
         this.clientSock_list=clientSock_list;
@@ -226,13 +228,19 @@ class MainThread extends Thread{
 
 
     public void run(){
+
         name= recvData();
         this.clientSock_list.put(name,sock);
         System.out.println(name);
+        if(flag==0){
+            /**서버가 처음으로 켜졌을 때만 불려지게...?*/
+            loadStorestoServer();
+            flag++;
+        }
 
 //        sendStoreList();
 //        sendClientSocketList();
-        loadStorestoServer();
+
 
         while(true){
             int situation = Integer.parseInt(recvData());
@@ -279,6 +287,7 @@ public class MainServer{
         StoreInfo stores= new StoreInfo();
         ServerSocket server=null;
         Socket socket=null;
+        int flag=0;
 
         try{
             server= new ServerSocket(23456);
@@ -286,11 +295,15 @@ public class MainServer{
                 System.out.println("..Main Server Waiting...");
                 socket=server.accept();
 
-                new MainThread(socket,stores,storeList,clientSocket_list,clientInfoList).start();
+
+
+                new MainThread(flag,socket,stores,storeList,clientSocket_list,clientInfoList).start();
             }
         }catch (IOException e){
             e.printStackTrace();
         }
     }
+
+
 
 }

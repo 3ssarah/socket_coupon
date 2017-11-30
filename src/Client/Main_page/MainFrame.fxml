@@ -58,7 +58,7 @@
                   </TableView>
                </children></AnchorPane>
          </content></Tab>
-      <Tab fx:id="setting_tab" text="Store setting">
+      <Tab fx:id="setting_tab" text="Store setting" >
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
