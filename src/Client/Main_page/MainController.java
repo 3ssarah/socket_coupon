@@ -125,20 +125,20 @@ public class MainController  /*implements Initializable*/  {
         String temp = "0";
 
         ArrayList<String> templist = new ArrayList<String>();
-        while (true) {
+        while ((temp=recvData()).equals("-1")!=true) {
+
             for(int i=0; i<3; i++){
                 temp = recvData();
-                System.out.println(temp);
                 if (temp.equals("-1")) break;
                 templist.add(i,temp);
             }
+            if(temp.equals("-1"))break;
 
-        if(temp.equals("-1"))break;
 
         String name = "[" + templist.get(2) + "][" + templist.get(1) + "] " + templist.get(0);
         System.out.println(name);
         storelist.add(name);
-        templist.clear();
+        //templist.clear();
         System.out.println("templist cleared");
         }
         templist.clear();

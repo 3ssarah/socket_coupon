@@ -168,6 +168,7 @@ class MainThread extends Thread{
         Iterator it= this.storeList.iterator();
         while(it.hasNext()){
             Store temp= (Store)it.next();
+            System.out.println(temp.getStore_name());
             sendData(temp.getStore_name());
             sendData(temp.getLocation());
             sendData(temp.getCategory());
@@ -205,7 +206,7 @@ class MainThread extends Thread{
                 store_phone=tempBr.readLine();
 
                 System.out.println(store_name+" "+store_category+" "+store_location+" "+store_phone+" "+owner);
-                Store tempStore= new Store(store_name,store_category,store_location,store_phone,owner);
+                Store tempStore= new Store(store_name,store_category,store_phone,store_location,owner);
                 storeList.add(tempStore);
                 System.out.println("store list added");
 
