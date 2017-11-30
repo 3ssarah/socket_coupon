@@ -124,24 +124,19 @@ public class MainController  /*implements Initializable*/  {
         sendData("0");
         String temp = "0";
 
-        ArrayList<String> templist = new ArrayList<String>();
+//        ArrayList<String> templist = new ArrayList<String>();
         while ((temp=recvData()).equals("-1")!=true) {
-
-            for(int i=0; i<3; i++){
-                temp = recvData();
-                if (temp.equals("-1")) break;
-                templist.add(i,temp);
-            }
-            if(temp.equals("-1"))break;
+            storelist.add(temp);
 
 
-        String name = "[" + templist.get(2) + "][" + templist.get(1) + "] " + templist.get(0);
-        System.out.println(name);
-        storelist.add(name);
-        //templist.clear();
-        System.out.println("templist cleared");
+
+//
+//        String name = "[" + templist.get(2) + "][" + templist.get(1) + "] " + templist.get(0);
+//        System.out.println(name);
+//        storelist.add(name);
+
         }
-        templist.clear();
+
     }
     /**recv Client list __signal:0*/
     public void recvClientList() {

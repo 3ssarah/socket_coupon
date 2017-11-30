@@ -170,8 +170,8 @@ class MainThread extends Thread{
             Store temp= (Store)it.next();
             System.out.println(temp.getStore_name());
             sendData(temp.getStore_name());
-            sendData(temp.getLocation());
-            sendData(temp.getCategory());
+//            sendData("["+temp.getLocation()+"]");
+//            sendData("["+temp.getCategory()+"]");
         }
         sendData("-1");
     }
