@@ -2,6 +2,7 @@ package Client.Main_page;
 
 
 
+import Client.Store.ChatClient;
 import Client.Store.Store;
 import Client.Store.StoreController;
 import javafx.beans.value.ChangeListener;
@@ -72,22 +73,26 @@ public class MainController  implements Initializable  {
                 sendData("5");//ask server to send specific store's information
                 Store  searched= recvInformation(newValue);
 
-                Stage storepage= new Stage();
-                storepage.initOwner(mainClient.getPrimaryStage());
-                storepage.setTitle(searched.getStore_name()+"store page");
+//                Stage storepage= new Stage();
+//                storepage.initOwner(mainClient.getPrimaryStage());
+//                storepage.setTitle(searched.getStore_name()+"store page");
+
+
 
                 try{
                     FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-                    Parent parent= loader.load();
+                    Parent storepage= loader.load();
 
                     storeCon= loader.<StoreController>getController();
                     storeCon.setMainClient(mainClient);
                     storeCon.setStore(searched);
                     System.out.println("set store and mainClient");
 
-                    Scene s= new Scene(parent);
-                    storepage.setScene(s);
-                    storepage.show();
+                    StackPane root=(StackPane)listViewBox.getScene().getRoot();
+                    root.getChildren().add(storepage);
+//                    Scene s= new Scene(parent);
+//                    storepage.setScene(s);
+//                    storepage.show();
 
 
                 }catch(Exception e){e.printStackTrace();}

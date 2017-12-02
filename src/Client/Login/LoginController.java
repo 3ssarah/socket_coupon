@@ -5,6 +5,7 @@ import Client.Main_page.MainClient;
 import Client.Main_page.MainController;
 import Client.Register.RegisterController;
 
+import Client.Store.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,6 +98,7 @@ public class LoginController  {
 
 
                 new MainClient(loginClient);
+                new ChatClient(loginClient);
 
 
 

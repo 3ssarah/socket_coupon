@@ -9,15 +9,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class StoreController {
     @FXML
-    private Button menuBtn, eventBtn, sendBtn;
+    private Button menuBtn, eventBtn, sendBtn, backBtn;
     @FXML
     private Label addr, phone, type,store_name;
     @FXML
     private ListView commentListView;
+    @FXML
+    private Pane storeFrame;
 
     /**Controller for menu and event*/
     private static EventInfoController eventCon;
@@ -78,5 +82,11 @@ public class StoreController {
     }
     public void handleSendBtn(ActionEvent event){
 
+    }
+    public void handleBackBtn(ActionEvent event){
+        try{
+            StackPane root=(StackPane)backBtn.getScene().getRoot();
+            root.getChildren().remove(storeFrame);
+        }catch(Exception e){e.printStackTrace();}
     }
 }

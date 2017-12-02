@@ -14,19 +14,18 @@
 <?import javafx.collections.FXCollections?>
 
 
+<?import javafx.scene.layout.StackPane?>
+<StackPane prefHeight="544.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="Client.Main_page.MainController">
+    <children>
 
 
-        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="744.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.141"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Main_page.MainController">
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="744.0" tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: white;" >
 
             <tabs>
-
                 <Tab fx:id="stores_tab" text="Stores">
-
                     <content>
-
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-
                             <children>
                   <ListView fx:id="listViewBox"  layoutX="45.0" layoutY="75.0" prefHeight="440.0" prefWidth="656.0" >
                       <items >
@@ -109,3 +108,5 @@
             </tabs>
 
         </TabPane>
+    </children>
+</StackPane>
