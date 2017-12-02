@@ -103,8 +103,9 @@ public class ChatServer {
         try{
             ChatServer= new ServerSocket(56565);
             while(true){
-                sock=ChatServer.accept();
                 System.out.println("..Chat Server waiting..");
+                sock=ChatServer.accept();
+
 
                 new ChatThread(sock).start();
             }

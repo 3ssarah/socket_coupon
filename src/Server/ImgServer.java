@@ -19,8 +19,9 @@ public class ImgServer {
         try{
             imgServer=new ServerSocket(45454);
             while(true){
-                sock= imgServer.accept();
                 System.out.println("..Img Server waiting..");
+                sock= imgServer.accept();
+
 
                 new ImgThread().start();
             }

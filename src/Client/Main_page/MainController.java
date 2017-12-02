@@ -49,6 +49,7 @@ public class MainController  implements Initializable  {
     private static DialogController dialogCon;
     private static StoreController storeCon;
     private static ItemDialogController itemCon;
+    private Store store1=null;
     private ArrayList<String> clientList=null;
 
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
@@ -65,51 +66,80 @@ public class MainController  implements Initializable  {
     @FXML public void initialize(URL location, ResourceBundle resources) {
 
         System.out.println("initialize--");
-        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
-
-                sendData("5");//ask server to send specific store's information
-                Store  searched= recvInformation(newValue);
-
-//                Stage storepage= new Stage();
-//                storepage.initOwner(mainClient.getPrimaryStage());
-//                storepage.setTitle(searched.getStore_name()+"store page");
+        listViewBox.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showStoreDetails(newValue));
 
 
+//        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
+//
+//                sendData("5");//ask server to send specific store's information
+//                recvInformation(newValue);
+//
+////                Stage storepage= new Stage();
+////                storepage.initOwner(mainClient.getPrimaryStage());
+////                storepage.setTitle(searched.getStore_name()+"store page");
+//
+//
+//                sendData("5");
+//                try{
+//                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+//                    Parent storepage= loader.load();
+//
+//                    storeCon= loader.<StoreController>getController();
+//                    storeCon.setMainClient(mainClient);
+//                    storeCon.setStore(store1);
+//                    System.out.println("set store and mainClient");
+//
+//                    StackPane root=(StackPane)listViewBox.getScene().getRoot();
+//                    root.getChildren().add(storepage);
+////                    Scene s= new Scene(parent);
+////                    storepage.setScene(s);
+////                    storepage.show();
+//
+//
+//                }catch(Exception e){e.printStackTrace();}
+//
+//            }
+//        });
 
-                try{
-                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-                    Parent storepage= loader.load();
 
-                    storeCon= loader.<StoreController>getController();
-                    storeCon.setMainClient(mainClient);
-                    storeCon.setStore(searched);
-                    System.out.println("set store and mainClient");
+    }
 
-                    StackPane root=(StackPane)listViewBox.getScene().getRoot();
-                    root.getChildren().add(storepage);
+    public void showStoreDetails(String newValue){
+        try{
+            sendData("5");
+            recvInformation(newValue);
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+            Parent storepage= loader.load();
+
+            storeCon= loader.<StoreController>getController();
+            storeCon.setMainClient(mainClient);
+            storeCon.setStore(store1);
+            System.out.println("set store and mainClient");
+
+            StackPane root=(StackPane)listViewBox.getScene().getRoot();
+            root.getChildren().add(storepage);
 //                    Scene s= new Scene(parent);
 //                    storepage.setScene(s);
 //                    storepage.show();
 
 
-                }catch(Exception e){e.printStackTrace();}
-
-            }
-        });
-
+        }catch(Exception e){e.printStackTrace();}
 
     }
 
+
+
     public void changeToMenu(String newValue){
         sendData("5");//ask server to send specific store's information
-        Store  searched= recvInformation(newValue);
+        recvInformation(newValue);
 
         Stage storepage= new Stage();
         storepage.initOwner(mainClient.getPrimaryStage());
-        storepage.setTitle(searched.getStore_name()+"store page");
+        storepage.setTitle(store1.getStore_name()+"store page");
 
         try{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
@@ -117,7 +147,7 @@ public class MainController  implements Initializable  {
 
             storeCon= loader.<StoreController>getController();
             storeCon.setMainClient(mainClient);
-            storeCon.setStore(searched);
+            storeCon.setStore(store1);
             System.out.println("set store and mainClient");
 
             Scene s= new Scene(parent);
@@ -250,24 +280,41 @@ public class MainController  implements Initializable  {
 
     }
     /**recv specific store information*/
-    public Store recvInformation(String name){
+    public void recvInformation(String name){
         System.out.println(" recvInformation function");
-        sendData(name);
+        sendData(name);//send selected store name
+
+        String tempRecv= recvData();
+        String[] arr= tempRecv.split(",");
 
         String  t_category, t_phone,t_location, t_owner;
+        for(int i=0; i<arr.length;i++){
+            System.out.println(arr[i]);
+        }
 
-        t_category=recvData();
-        System.out.println(" t_category: "+t_category);
-        t_phone=recvData();
-        System.out.println(" t_phone: "+t_phone);
-        t_location=recvData();
-        System.out.println(" t_location: "+t_location);
-        t_owner=recvData();
-        System.out.println(name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
-        Store tempStore = new Store(name, t_category, t_phone,t_location, t_owner);
+//        t_category=recvData();
+//        System.out.println(" t_category: "+t_category);
+//        t_phone=recvData();
+//        System.out.println(" t_phone: "+t_phone);
+//        t_owner=recvData();
+//        System.out.println(" t_owner: "+t_owner);
+//        t_location=recvData();
+//        String temp;
+//        ArrayList<String> templist= new ArrayList<String>();
+//        int num=0;
+//        while(true){
+//            if((temp=recvData()).equals("-1")) break;
+//            System.out.println(temp);
+//            templist.add(num,temp);
+//            num++;
+//        }
+//        System.out.println(name+" "+templist.get(0)+" "+templist.get(1)+" "+templist.get(2)+templist.get(3));
+//        System.out.println(name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
+        //this.store1= new Store(name,templist.get(0),templist.get(1),templist.get(2),templist.get(3));
+        this.store1 = new Store(name, arr[0], arr[1],arr[2], arr[3]);
         System.out.println("temp store!");
 
-        return  tempStore;
+
     }
     /**recv Client list __signal:0*/
     public void recvClientList() {
