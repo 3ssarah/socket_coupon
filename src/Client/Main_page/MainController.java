@@ -115,9 +115,12 @@ public class MainController  implements Initializable  {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
             Parent storepage= loader.load();
 
+            ChatClient chatClient=new ChatClient(mainClient);
             storeCon= loader.<StoreController>getController();
             storeCon.setMainClient(mainClient);
+            storeCon.setChatClient(chatClient);
             storeCon.setStore(store1);
+            storeCon.settingLabel();
             System.out.println("set store and mainClient");
 
             StackPane root=(StackPane)listViewBox.getScene().getRoot();
@@ -292,25 +295,7 @@ public class MainController  implements Initializable  {
             System.out.println(arr[i]);
         }
 
-//        t_category=recvData();
-//        System.out.println(" t_category: "+t_category);
-//        t_phone=recvData();
-//        System.out.println(" t_phone: "+t_phone);
-//        t_owner=recvData();
-//        System.out.println(" t_owner: "+t_owner);
-//        t_location=recvData();
-//        String temp;
-//        ArrayList<String> templist= new ArrayList<String>();
-//        int num=0;
-//        while(true){
-//            if((temp=recvData()).equals("-1")) break;
-//            System.out.println(temp);
-//            templist.add(num,temp);
-//            num++;
-//        }
-//        System.out.println(name+" "+templist.get(0)+" "+templist.get(1)+" "+templist.get(2)+templist.get(3));
-//        System.out.println(name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
-        //this.store1= new Store(name,templist.get(0),templist.get(1),templist.get(2),templist.get(3));
+
         this.store1 = new Store(name, arr[0], arr[1],arr[2], arr[3]);
         System.out.println("temp store!");
 

@@ -6,6 +6,7 @@ import Client.Main_page.MainController;
 import Client.Register.RegisterController;
 
 import Client.Store.ChatClient;
+import Client.Store.StoreController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +39,7 @@ public class LoginController  {
     private static LoginController controller;
     private static RegisterController con;
     private static MainController mainCon;
+
     // 로그인 애플리케이션 참조
     private  LoginClient loginClient;
 
@@ -98,7 +100,6 @@ public class LoginController  {
 
 
                 new MainClient(loginClient);
-                new ChatClient(loginClient);
 
 
 
@@ -136,6 +137,7 @@ public class LoginController  {
 
             StackPane root=(StackPane)create.getScene().getRoot();
             root.getChildren().add(register);
+
 
 
         }catch(Exception e){

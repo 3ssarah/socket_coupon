@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="storeFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/8.0.141"
+<Pane fx:id="storeFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544" prefWidth="744" xmlns="http://javafx.com/javafx/8.0.141"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Store.StoreController" style="-fx-background-color: white;">
    <children>
       <Button fx:id="backBtn" onAction="#handleBackBtn" layoutX="623.0" layoutY="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" text="Back" />

@@ -1,9 +1,15 @@
 package Client.Store;
 
+import Client.Download.DownloadClient;
+import Client.Download.DownloadController;
 import Client.Main_page.MainClient;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,63 +19,90 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class StoreController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class StoreController implements Initializable{
     @FXML
-    private Button menuBtn, eventBtn, sendBtn, backBtn;
+    private Button  sendBtn, backBtn;
     @FXML
     private Label addr, phone, type,store_name;
     @FXML
-    private ListView commentListView;
+    private ListView<String> commentListView, menuList, eventList;
     @FXML
     private Pane storeFrame;
+    ObservableList<String> m_list= FXCollections.observableArrayList();
+    ObservableList<String> e_list= FXCollections.observableArrayList();
+    ObservableList<String> comment_list= FXCollections.observableArrayList();
 
     /**Controller for menu and event*/
     private static EventInfoController eventCon;
     private static MenuController menuCon;
+    private static DownloadController downCon;
 
     /**client 참조*/
     private MainClient mainClient;
+    private ChatClient chatClient;
     /**store 참조*/
     private Store store=null;
+
+    public void setChatClient(ChatClient chatClient){this.chatClient=chatClient;}
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
     public void setStore(Store store){this.store=store;}
     public StoreController(){
 
+        menuList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->changeToDownload(newValue));
+        eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
     }
-    public void handleMenuBtn(ActionEvent event){
 
-        //send specific signal to server
-        Stage menu= new Stage();
-        menu.initOwner(mainClient.getPrimaryStage());
-        menu.setTitle("Menu");
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
+    }
+    public void settingLabel(){
+        store_name.setText(store.getStore_name());
+        type.setText(store.getCategory());
+        phone.setText(store.getStore_phone());
+        addr.setText(store.getLocation());
+    }
+
+    public void changeToDownload(String newValue){
+
+
+
+        Stage down= new Stage();
+        down.initOwner(mainClient.getPrimaryStage());
+        down.setTitle("Buying_"+newValue);
+
         try{
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("MenuFrame.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Download/template.fxml"));
             Parent parent = loader.load();
-
-            menuCon= loader.<MenuController>getController();
-            menuCon.setMainClient(mainClient);
-            //menuCon.setClient(mainClient.getClient());
+            DownloadClient downClient=new DownloadClient(mainClient);
+            downCon=loader.<DownloadController>getController();
+            downCon.setDownloadClient(downClient);
 
             Scene s= new Scene(parent);
-            menu.setScene(s);
-            menu.setResizable(false);
-            menu.show();
+            down.setScene(s);
+            down.setResizable(false);
+            down.show();
 
-        }catch (Exception e){e.printStackTrace();}
-
+        }catch(Exception e){e.printStackTrace();}
     }
-    public void handleEventBtn(ActionEvent event){
+
+    public void showEventDetails(String newValue){
 
         //send specific signal to server
         Stage event_info= new Stage();
         event_info.initOwner(mainClient.getPrimaryStage());
-        event_info.setTitle("Event");
+        event_info.setTitle(store.getStore_name()+" Event: "+newValue);
         try{
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Event_infoFrame.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Event_information.fxml"));
             Parent parent = loader.load();
 
             eventCon= loader.<EventInfoController>getController();
-            eventCon.setClient(mainClient.getClient());
+            eventCon.setMainClient(mainClient);
+
 
             Scene s= new Scene(parent);
             event_info.setScene(s);
@@ -77,9 +110,8 @@ public class StoreController {
             event_info.show();
 
         }catch (Exception e){e.printStackTrace();}
-
-
     }
+
     public void handleSendBtn(ActionEvent event){
 
     }
@@ -89,4 +121,7 @@ public class StoreController {
             root.getChildren().remove(storeFrame);
         }catch(Exception e){e.printStackTrace();}
     }
+
+
 }
+

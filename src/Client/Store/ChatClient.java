@@ -1,18 +1,20 @@
 package Client.Store;
 
 import Client.Client;
-import Client.Login.LoginClient;
 import Client.Main_page.MainClient;
 
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ChatClient {
 
     private Client client;
-    public ChatClient(LoginClient loginClient){
-        this.client= loginClient.getClient();
+    public ChatClient(MainClient mainClient){
+        this.client= mainClient.getClient();
 
         try{
             this.client.setMsgSock(new Socket(client.ServIP, client.commentPort));
@@ -30,5 +32,18 @@ public class ChatClient {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+    /** receive Data */
+    public String recvData(){
+        String result = null;
+        BufferedReader br=null;
+        try{
+            br= new BufferedReader(new InputStreamReader(client.getMsgSock().getInputStream()));
+            result=br.readLine();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
