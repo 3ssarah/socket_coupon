@@ -94,7 +94,7 @@ public class LoginController  {
                 loginClient.getClient().getData().setPwd(pwd);
                 loginClient.getClient().loginComplete=true;
 
-                //여기서 현재화면 죽이고
+                 //여기서 현재화면 죽이고
                 Stage stage=(Stage)login.getScene().getWindow();
                 stage.close();
 

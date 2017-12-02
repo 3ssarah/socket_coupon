@@ -4,55 +4,51 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Template" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="600" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Download.DownloadController">
          <children>
-            <TextArea layoutX="77.0" layoutY="288.0" prefHeight="74.0" prefWidth="412.0" />
-            <Button layoutX="499.0" layoutY="288.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="55.0" text="Buy" />
-            <VBox layoutX="48.0" layoutY="24.0" prefHeight="222.0" prefWidth="133.0">
+            <TextArea fx:id="commentArea" layoutX="73.0" layoutY="315.0" prefHeight="74.0" prefWidth="411.0" />
+            <Button fx:id="buyBtn" onAction="#handleBuyBtn" layoutX="502.0" layoutY="315.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="55.0" text="Buy" />
+            <VBox layoutX="42.0" layoutY="51.0" prefHeight="222.0" prefWidth="133.0">
                <children>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="catCheck" mnemonicParsing="false" />
                   <ImageView fitHeight="177.0" fitWidth="133.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../IMG/cat.jpg" />
+                        <Image fx:id="catImg" url="@../../Server/Image/cat.jpg" />
                      </image>
                   </ImageView>
                </children>
             </VBox>
-            <VBox layoutX="233.0" layoutY="24.0" prefHeight="222.0" prefWidth="133.0">
+            <VBox layoutX="227.0" layoutY="51.0" prefHeight="222.0" prefWidth="133.0">
                <children>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="dogCheck" mnemonicParsing="false" />
                   <ImageView fitHeight="184.0" fitWidth="133.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../IMG/dog.jpg" />
+                        <Image fx:id="dogImg" url="@../../Server/Image/dog.jpg" />
                      </image>
                   </ImageView>
                </children>
             </VBox>
-            <VBox layoutX="409.0" layoutY="24.0" prefHeight="222.0" prefWidth="133.0">
+            <VBox layoutX="403.0" layoutY="51.0" prefHeight="222.0" prefWidth="133.0">
                <children>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="bdCheck" mnemonicParsing="false" />
                   <ImageView fitHeight="184.0" fitWidth="133.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../IMG/birthday.png" />
+                        <Image fx:id="birthdayImg" url="@../../Server/Image/birthday.png" />
                      </image>
                   </ImageView>
                </children>
             </VBox>
-            <Label layoutX="65.0" layoutY="261.0" text="Message">
+            <Label layoutX="59.0" layoutY="288.0" text="Message">
                <font>
                   <Font name="Arial Italic" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="467.0" layoutY="239.0" text="*Check the template" />
+            <Label layoutX="461.0" layoutY="266.0" text="*Check the template" />
+            <Button fx:id="CBtn" onAction="#handleCBtn" layoutX="530.0" layoutY="27.0" mnemonicParsing="false" text="Cancel" />
          </children></AnchorPane>
-  </content>
-</TitledPane>

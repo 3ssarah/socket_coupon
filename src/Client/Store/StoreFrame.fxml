@@ -9,7 +9,8 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.collections.FXCollections?>
-<Pane fx:id="storeFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544" prefWidth="744" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Store.StoreController">
+<Pane fx:id="storeFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544" prefWidth="744" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Store.StoreController">
    <children>
       <Button fx:id="backBtn" layoutX="623.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="27.0" prefWidth="88.0" text="Back" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
@@ -28,9 +29,14 @@
       <Label fx:id="phone" layoutX="333.0" layoutY="149.0" prefHeight="15.0" prefWidth="173.0" text="010-1234-5678" />
       <Label layoutX="272.0" layoutY="123.0" text="Category:" />
       <Label fx:id="type" layoutX="337.0" layoutY="123.0" prefHeight="15.0" prefWidth="166.0" text="type" />
-      <TextArea fx:id="testArea" layoutX="52.0" layoutY="476.0" prefHeight="54.0" prefWidth="567.0" />
+      <TextArea fx:id="textArea" layoutX="52.0" layoutY="476.0" prefHeight="54.0" prefWidth="567.0" />
       <Button fx:id="sendBtn" layoutX="622.0" layoutY="476.0" mnemonicParsing="false" onAction="#handleSendBtn" prefHeight="54.0" prefWidth="88.0" text="Comment" />
-      <ListView  fx:id="commentListView" layoutX="53.0" layoutY="347.0" prefHeight="120.0" prefWidth="658.0" />
+      <ListView  fx:id="commentListView" layoutX="53.0" layoutY="347.0" prefHeight="120.0" prefWidth="658.0" >
+         <items >
+            <FXCollections fx:factory="observableArrayList" >
+            </FXCollections>
+         </items>
+      </ListView>
       <Label layoutX="53.0" layoutY="322.0" text="Comment">
          <font>
             <Font size="14.0" />

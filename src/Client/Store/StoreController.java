@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ public class StoreController implements Initializable{
     private ListView<String> commentListView, menuList, eventList;
     @FXML
     private Pane storeFrame;
+    @FXML
+    TextArea textArea;
     ObservableList<String> m_list= FXCollections.observableArrayList();
     ObservableList<String> e_list= FXCollections.observableArrayList();
     ObservableList<String> comment_list= FXCollections.observableArrayList();
@@ -51,13 +54,16 @@ public class StoreController implements Initializable{
     public void setStore(Store store){this.store=store;}
     public StoreController(){
 
-        menuList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->changeToDownload(newValue));
-        eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        menuList.setItems(m_list);
+        eventList.setItems(e_list);
+        menuList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->changeToDownload(newValue));
+        eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
 
     }
     public void settingLabel(){
@@ -113,7 +119,9 @@ public class StoreController implements Initializable{
     }
 
     public void handleSendBtn(ActionEvent event){
-
+        commentListView.setItems(comment_list);
+        comment_list.add("["+mainClient.getClient().getData().getID()+"]"+textArea.getText());
+        textArea.setText("");
     }
     public void handleBackBtn(ActionEvent event){
         try{
