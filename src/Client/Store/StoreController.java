@@ -43,7 +43,8 @@ public class StoreController {
             Parent parent = loader.load();
 
             menuCon= loader.<MenuController>getController();
-            menuCon.setClient(mainClient.getClient());
+            menuCon.setMainClient(mainClient);
+            //menuCon.setClient(mainClient.getClient());
 
             Scene s= new Scene(parent);
             menu.setScene(s);

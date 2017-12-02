@@ -6,26 +6,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Menu {
+    private int number;
     private String product_name=null;
     private int price;
-    private  double rate;
-    private String type=null;
-    private int day; //term of validity
+    private String type="Product";
+    private final  int day = 30; //term of validity ==1month
     private Store store=null;
 
-    public Menu(String product_name, Store store, int price, int day){
+    public Menu(String product_name, Store store, int price){
+        this.number=number;
         this.product_name=product_name;
         this.store=store;
         this.type="Product";
-        this.day=day;
         this.price=price;
-    }
-    public Menu(String product_name, Store store, double rate,int day){
-        this.product_name=product_name;
-        this.store=store;
-        this.type="Discount coupon";
-        this.rate=rate;
-        this.day=day;
     }
 
     public String getExpireDate(int day){
@@ -56,13 +49,6 @@ public class Menu {
         this.price = price;
     }
 
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
 
     public String getType() {
         return type;
@@ -76,9 +62,6 @@ public class Menu {
         return day;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
 
     public Store getStore() {
         return store;

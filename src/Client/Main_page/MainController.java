@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
 import Client.Client;
 import java.io.BufferedReader;
@@ -26,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController  /*implements Initializable*/  {
+public class MainController  implements Initializable  {
 
 
 
@@ -46,6 +47,7 @@ public class MainController  /*implements Initializable*/  {
     private static MainController controller;
     private static DialogController dialogCon;
     private static StoreController storeCon;
+    private static ItemDialogController itemCon;
     private ArrayList<String> clientList=null;
 
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
@@ -55,34 +57,141 @@ public class MainController  /*implements Initializable*/  {
         controller=this;
 
 
+
+
     }
 
     @FXML public void initialize(URL location, ResourceBundle resources) {
 
         System.out.println("initialize--");
-        /** First tab: stores_tab Event Handler **/
+        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
 
-        recvStoreList();
-        recvClientList();
+                sendData("5");//ask server to send specific store's information
+                Store  searched= recvInformation(newValue);
 
-        listViewBox.setItems(storelist);
+                Stage storepage= new Stage();
+                storepage.initOwner(mainClient.getPrimaryStage());
+                storepage.setTitle(searched.getStore_name()+"store page");
 
+                try{
+                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+                    Parent parent= loader.load();
+
+                    storeCon= loader.<StoreController>getController();
+                    storeCon.setMainClient(mainClient);
+                    storeCon.setStore(searched);
+                    System.out.println("set store and mainClient");
+
+                    Scene s= new Scene(parent);
+                    storepage.setScene(s);
+                    storepage.show();
+
+
+                }catch(Exception e){e.printStackTrace();}
+
+            }
+        });
+
+
+    }
+
+    public void changeToMenu(String newValue){
+        sendData("5");//ask server to send specific store's information
+        Store  searched= recvInformation(newValue);
+
+        Stage storepage= new Stage();
+        storepage.initOwner(mainClient.getPrimaryStage());
+        storepage.setTitle(searched.getStore_name()+"store page");
+
+        try{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+            Parent parent= loader.load();
+
+            storeCon= loader.<StoreController>getController();
+            storeCon.setMainClient(mainClient);
+            storeCon.setStore(searched);
+            System.out.println("set store and mainClient");
+
+            Scene s= new Scene(parent);
+            storepage.setScene(s);
+            storepage.show();
+
+
+        }catch(Exception e){e.printStackTrace();}
 
     }
     /** First tab: stores_tab Event Handler **/
-
     public void handleSearch(ActionEvent event){
         System.out.println("handleSearch Function");
         recvStoreList();
+        listViewBox.setItems(storelist);
+
+
+        System.out.println("recvStore done1!!");
+
         //recvClientList();
 
-        listViewBox.setItems(storelist);
+
     }
 
+    /** Third tab: setting_tab Event Handler **/
+    public void handleAddMenuBtn(ActionEvent event){
+        try{
+            sendData("6");//send signal add item
+            Stage menuDialog = new Stage();
+            menuDialog.initOwner(mainClient.getPrimaryStage());
+            menuDialog.setTitle("Add Menu item");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("ItemDialog.fxml"));
+            Parent parent= loader.load();
+
+            itemCon= loader.<ItemDialogController>getController();
+            itemCon.setMainClient(mainClient);
+
+            Scene s = new Scene(parent);
+            menuDialog.setScene(s);
+            menuDialog.setResizable(false);
+            menuDialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+    public void handleAddEventBtn(ActionEvent event){
+        try{
+            sendData("6");//send signal add item
+            Stage eventDialog = new Stage();
+            eventDialog.initOwner(mainClient.getPrimaryStage());
+            eventDialog.setTitle("Add Menu item");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("EventDialog.fxml"));
+            Parent parent= loader.load();
+
+            itemCon= loader.<ItemDialogController>getController();
+            itemCon.setMainClient(mainClient);
+
+            Scene s = new Scene(parent);
+            eventDialog.setScene(s);
+            eventDialog.setResizable(false);
+            eventDialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 
     /** Second tab: my_tab Event Handler **/
 
-    /** Third tab: setting_tab Event Handler **/
 
     /** First tab: stores_tab Event Handler functions **/
 
@@ -133,49 +242,26 @@ public class MainController  /*implements Initializable*/  {
         while ((temp=recvData()).equals("-1")!=true) {
             storelist.add(temp);
         }
-        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
-
-                sendData("5");//ask server to send specific store's information
-                Store  searched= recvInformation(newValue);
-                Stage storepage= new Stage();
-                storepage.initOwner(mainClient.getPrimaryStage());
-                storepage.setTitle(searched.getStore_name()+"store page");
-
-                try{
-                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-                    Parent parent= loader.load();
-
-                    storeCon= loader.<StoreController>getController();
-                    storeCon.setMainClient(mainClient);
-                    storeCon.setStore(searched);
-
-                    Scene s= new Scene(parent);
-                    storepage.setScene(s);
-                    storepage.show();
-
-
-                }catch(Exception e){e.printStackTrace();}
-
-            }
-        });
 
     }
     /**recv specific store information*/
     public Store recvInformation(String name){
         System.out.println(" recvInformation function");
         sendData(name);
-        System.out.println(" sendData pass");
-        String t_name, t_category, t_phone,t_location, t_owner;
-        t_name=recvData();
+
+        String  t_category, t_phone,t_location, t_owner;
+
         t_category=recvData();
+        System.out.println(" t_category: "+t_category);
         t_phone=recvData();
+        System.out.println(" t_phone: "+t_phone);
         t_location=recvData();
+        System.out.println(" t_location: "+t_location);
         t_owner=recvData();
-        System.out.println(t_name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
-        Store tempStore= new Store(t_name, t_category, t_phone,t_location, t_owner);
+        System.out.println(name+" "+t_category+" "+t_phone+" "+t_location+" "+t_owner);
+        Store tempStore = new Store(name, t_category, t_phone,t_location, t_owner);
+        System.out.println("temp store!");
+
         return  tempStore;
     }
     /**recv Client list __signal:0*/
@@ -225,3 +311,6 @@ public class MainController  /*implements Initializable*/  {
         return result;
     }
 }
+
+
+

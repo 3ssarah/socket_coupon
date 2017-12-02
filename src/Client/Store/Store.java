@@ -5,12 +5,10 @@ import javafx.beans.property.StringProperty;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 public class Store {
     private String store_name=null;
-
-
-
     private String category=null;
     private String location=null;
     private String store_phone=null;
@@ -18,6 +16,7 @@ public class Store {
     private ArrayList<Socket> customer= null;
 
 
+    private ArrayList<Menu> itemlist=null;
     private Hashtable<Integer, Menu> menu_table=null;
 
     public Store(String store_name, String category, String store_phone, String location,String owner){
@@ -26,6 +25,14 @@ public class Store {
         this.store_phone=store_phone;
         this.location=location;
         this.owner=owner;
+    }
+
+    public ArrayList<Menu> getItemlist() {
+        return itemlist;
+    }
+
+    public void setItemlist(ArrayList<Menu> itemlist) {
+        this.itemlist = itemlist;
     }
 
     public String getOwner() {
@@ -75,4 +82,13 @@ public class Store {
         this.customer.remove(sock);
     }
 
+    public Menu getItem(String itemName){
+        Iterator it= itemlist.iterator();
+        Menu temp=null;
+        while(it.hasNext()){
+             temp= (Menu)it.next();
+             if(temp.getProduct_name().equals(itemName)) return temp;
+        }
+        return temp;
+    }
 }

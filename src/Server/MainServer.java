@@ -1,6 +1,7 @@
 package Server;
 
 import Client.Client;
+import Client.Store.Menu;
 import Client.Store.Store;
 
 import java.io.*;
@@ -13,20 +14,18 @@ import java.util.Iterator;
 class StoreInfo{
     private Hashtable<String, String> storeInfo =null; //store information <name, location>
     final private String fileName_store=getClass().getResource("").getPath()+"store_info.txt";
+    private ArrayList<Menu> imtemList= new ArrayList<Menu>();
 
-//    public Hashtable<String, String> getStoreInfo(){
-//        return this.storeInfo;
-//    }
     public String getFileName_store(){return fileName_store;}
     public StoreInfo(){
         storeInfo= new Hashtable<String, String>();
-
         try{
             hashMake();
         }catch(IOException e){
             e.printStackTrace();
         }
     }
+
     public void hashMake()throws IOException{
 
         BufferedReader br= new BufferedReader(new FileReader(fileName_store));
@@ -57,6 +56,33 @@ class StoreInfo{
         }
 
     }
+    public void saveItem(){
+
+    }
+
+}
+class MenuInfo{
+    private Hashtable<String, String>menu_info=null; // menu item information<number, menu name>
+
+    private String fileName_m;
+    public MenuInfo(String storeName){
+        fileName_m=getClass().getResource("").getPath()+storeName+"_menu.txt";
+
+    }
+    public void hashMake_menu()throws IOException{
+        BufferedReader br= new BufferedReader(new FileReader(fileName_m));
+        String menu_name; String price;
+
+        while((menu_name=br.readLine())!=null){
+            price=(br.readLine()).toString();
+            System.out.println("종류: "+br.readLine());
+            menu_info.put(menu_name,price );
+        }
+    }
+    public void Insert_item(String name,String price){
+        menu_info.put(name, price);
+    }
+
 }
 
 class MainThread extends Thread{
@@ -72,11 +98,11 @@ class MainThread extends Thread{
     private StoreInfo stores;
 
     /** For Searching specific Store Variables*/
-    String s_name= new String();
-    String s_location= new String();
-    String s_category= new String();
-    String s_owner= new String();
-    String s_phone= new String();
+    String s_name;
+    String s_location;
+    String s_category;
+    String s_owner;
+    String s_phone;
 
 
     public MainThread(Socket sock,StoreInfo stores,ArrayList<Store> storeList ,Hashtable<String,Socket>clientSock_list,ArrayList<Client> clientInfoList){
@@ -145,7 +171,49 @@ class MainThread extends Thread{
         }
     }
 
+    /**Add Menu Item*/
+    public void addMenuItem(String storeName) {
+        // Add menu item into store's item list
+        try {
+            Iterator it = this.storeList.iterator();
+            Store temp=null;
+            while(it.hasNext()){
+                temp=(Store)it.next();
+                if(temp.getStore_name().equals(storeName)) break;
+            }
+            String menuName= br.readLine();
+            String menuPrice= br.readLine();
+            Menu tempMenu= new Menu(menuName, temp, Integer.parseInt(menuPrice));
+            temp.getItemlist().add(tempMenu);
 
+            /**Save into file*/
+            String filename = getClass().getResource("").getPath() + storeName + "_menu.txt";//file name= storeName_menu.txt
+            BufferedWriter fw= new BufferedWriter(new FileWriter(filename, true));
+            fw.write(menuName+","+menuPrice+","+storeName+"\n");// save like : item name,1000,store name\n
+            fw.close();
+
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+    /** send Menu item to client*/
+    public void sendItemlist(){
+
+    }
+
+//    /**Delete Menu item*/
+//    public void deleteItem(String storeName, String itemName){
+//        try {
+//            Iterator it = this.storeList.iterator();
+//            Store temp = null;
+//            while (it.hasNext()) {
+//                temp = (Store) it.next();
+//                if (temp.getStore_name().equals(storeName)) break;
+//            }
+//              Menu tempItem=temp.getItem(itemName) ;
+//            temp.getItemlist().remove(tempItem);
+//
+//        }catch(Exception e){e.printStackTrace();}
+//    }
     /**Enter Store*/
     public void enterStore(){
         Iterator it = this.storeList.iterator();
@@ -163,13 +231,13 @@ class MainThread extends Thread{
             e.printStackTrace();
         }
     }
+
     public void deleteStore(){
         this.storeList.remove(myStore);
     }
     /** exit store*/
     public void exitStore(){
         myStore.deletCustomer(sock);
-
     }
     /**Send store list */
     public void sendStoreList(){
@@ -198,7 +266,7 @@ class MainThread extends Thread{
 
     /** Search Store by location*/
     public void sendSearchedStoreList(){
-        String s_location=recvData();
+
 
         BufferedReader tempbr= null;
 
@@ -209,11 +277,14 @@ class MainThread extends Thread{
             this.s_location=tempbr.readLine();
             this.s_phone=tempbr.readLine();
 
-            pw.println(this.s_name);
-            pw.println(this.s_category);
-            pw.println(this.s_phone);
-            pw.println(this.s_location);
-            pw.println(this.s_owner);
+            System.out.println(s_owner+ s_category+s_location+s_phone);
+
+            pw.println(s_category);
+            pw.println(s_phone);
+            pw.println(s_location);
+            pw.println(s_owner);
+
+            System.out.println("send all data");
 
         }catch(Exception e){e.printStackTrace();}
     }
@@ -265,17 +336,16 @@ class MainThread extends Thread{
                     this.s_name=recvData();
                     sendSearchedStoreList();
 
-//                    pw.println(this.s_name);
-//                    pw.println(this.s_category);
-//                    pw.println(this.s_phone);
-//                    pw.println(this.s_location);
-//                    pw.println(this.s_owner);
-                    this.s_phone=null;
+                    System.out.println("end of sendSearchedStoreLsit()");
+                    this.s_name=null;
                     this.s_location=null;
                     this.s_phone=null;
                     this.s_category=null;
                     this.s_owner=null;
                     break;
+                case 6: //add menu item
+                    this.s_name=recvData();
+                    addMenuItem(s_name);
 
             }
         }

@@ -26,6 +26,8 @@ public class MainStage extends Stage {
             controller.setClient(client);
             controller.setMainClient(mainClient);
             System.out.println("controller setting");
+           // controller.recvStoreList();
+
 
             Scene s= new Scene(main);
             setScene(s);
