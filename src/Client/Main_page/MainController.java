@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 public class MainController  implements Initializable  {
 
 
+    @FXML private Tab setting_tab;
 
     /**tab: stores*/
     @FXML private ListView<String> listViewBox;
@@ -67,7 +68,7 @@ public class MainController  implements Initializable  {
 
         System.out.println("initialize--");
         listViewBox.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showStoreDetails(newValue));
-
+        System.out.println("list view setting");
 
 //        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 //            @Override
@@ -105,6 +106,12 @@ public class MainController  implements Initializable  {
 //        });
 
 
+
+    }
+    public void checkOwner(){
+
+    if( mainClient.getClient().getData().isShop()==false) setting_tab.setDisable(true);
+    else setting_tab.setDisable(false);
     }
 
     public void showStoreDetails(String newValue){
@@ -119,8 +126,13 @@ public class MainController  implements Initializable  {
             storeCon= loader.<StoreController>getController();
             storeCon.setMainClient(mainClient);
             storeCon.setChatClient(chatClient);
+            chatClient.sendData("2");
+            chatClient.sendData(store1.getStore_name());
             storeCon.setStore(store1);
             storeCon.settingLabel();
+            storeCon.setCommentsView();
+           // storeCon.setCommentsView();
+
             System.out.println("set store and mainClient");
 
             StackPane root=(StackPane)listViewBox.getScene().getRoot();
@@ -136,33 +148,35 @@ public class MainController  implements Initializable  {
 
 
 
-    public void changeToMenu(String newValue){
-        sendData("5");//ask server to send specific store's information
-        recvInformation(newValue);
-
-        Stage storepage= new Stage();
-        storepage.initOwner(mainClient.getPrimaryStage());
-        storepage.setTitle(store1.getStore_name()+"store page");
-
-        try{
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-            Parent parent= loader.load();
-
-            storeCon= loader.<StoreController>getController();
-            storeCon.setMainClient(mainClient);
-            storeCon.setStore(store1);
-            System.out.println("set store and mainClient");
-
-            Scene s= new Scene(parent);
-            storepage.setScene(s);
-            storepage.show();
-
-
-        }catch(Exception e){e.printStackTrace();}
-
-    }
+//    public void changeToMenu(String newValue){
+//        sendData("5");//ask server to send specific store's information
+//        recvInformation(newValue);
+//
+//        Stage storepage= new Stage();
+//        storepage.initOwner(mainClient.getPrimaryStage());
+//        storepage.setTitle(store1.getStore_name()+"store page");
+//
+//        try{
+//            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
+//            Parent parent= loader.load();
+//
+//            storeCon= loader.<StoreController>getController();
+//            storeCon.setMainClient(mainClient);
+//            storeCon.setStore(store1);
+//
+//            System.out.println("set store and mainClient");
+//
+//            Scene s= new Scene(parent);
+//            storepage.setScene(s);
+//            storepage.show();
+//
+//
+//        }catch(Exception e){e.printStackTrace();}
+//
+//    }
     /** First tab: stores_tab Event Handler **/
     public void handleSearch(ActionEvent event){
+
         System.out.println("handleSearch Function");
         recvStoreList();
         listViewBox.setItems(storelist);

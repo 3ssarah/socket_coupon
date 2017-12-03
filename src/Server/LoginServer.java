@@ -132,6 +132,7 @@ class LoginThread extends Thread{
                         case 1:
                             pw.println("Login is completed!");
                             pw.println("0");
+                            pw.println(checkOwner(id));
                             member.saveFile();
                             vec.remove(sock);
                             return;
@@ -157,7 +158,7 @@ class LoginThread extends Thread{
     public void saveMemInfo(String ID, String phoneNumber,String shop){
 
 
-        String filename = getClass().getResource("/MemberIfno").getPath()+ID+".txt";
+        String filename = getClass().getResource("").getPath()+ID+".txt";
         try{
 
             BufferedWriter fw= new BufferedWriter(new FileWriter((filename)));
@@ -167,6 +168,18 @@ class LoginThread extends Thread{
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
+    }
+    public String checkOwner(String ID){
+        String filename = getClass().getResource("").getPath()+ID+".txt";
+        String check=null;
+        try{
+            BufferedReader br= new BufferedReader(new FileReader(filename));
+            br.readLine();
+            check=br.readLine();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return check;
     }
 }
 

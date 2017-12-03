@@ -25,6 +25,7 @@ public class MainStage extends Stage {
             controller=loader.<MainController>getController();
             controller.setClient(client);
             controller.setMainClient(mainClient);
+            controller.checkOwner();
             System.out.println("controller setting");
            // controller.recvStoreList();
 

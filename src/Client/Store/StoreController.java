@@ -62,6 +62,7 @@ public class StoreController implements Initializable{
 
         menuList.setItems(m_list);
         eventList.setItems(e_list);
+        commentListView.setItems(comment_list);
         menuList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->changeToDownload(newValue));
         eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
 
@@ -119,9 +120,17 @@ public class StoreController implements Initializable{
     }
 
     public void handleSendBtn(ActionEvent event){
-        commentListView.setItems(comment_list);
-        comment_list.add("["+mainClient.getClient().getData().getID()+"]"+textArea.getText());
+
+
+        System.out.println("handle send button");
+
+        chatClient.sendData("0"); //send signal to chat server
+        chatClient.sendData(store.getStore_name());
+        String temp="["+mainClient.getClient().getData().getID()+"]"+textArea.getText();
+        comment_list.add(temp);
         textArea.setText("");
+        chatClient.sendData(temp);
+
     }
     public void handleBackBtn(ActionEvent event){
         try{
@@ -129,6 +138,17 @@ public class StoreController implements Initializable{
             root.getChildren().remove(storeFrame);
         }catch(Exception e){e.printStackTrace();}
     }
+
+    public void setCommentsView(){
+        chatClient.sendData("1");
+        comment_list.clear();
+        String temp;
+        while((temp=chatClient.recvData()).equals("-1")!=true){
+            comment_list.add(temp);
+        }
+    }
+
+
 
 
 }

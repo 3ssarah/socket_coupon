@@ -277,18 +277,9 @@ class MainThread extends Thread{
             this.s_location=tempbr.readLine();
             this.s_phone=tempbr.readLine();
 
-//            pw.println(s_category);
-//            pw.println(s_phone);
-//            pw.println(s_location);
-//            pw.println(s_owner);
             String tempSend=s_category+","+s_phone+","+s_location+","+s_owner;
             System.out.println(tempSend);
             sendData(tempSend);
-//            sendData(s_phone);
-//            sendData(s_owner);
-//            sendData(s_location);
-//
-//            sendData("-1");
 
             System.out.println("send all data");
 

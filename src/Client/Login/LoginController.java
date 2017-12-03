@@ -92,12 +92,13 @@ public class LoginController  {
                 System.out.println("login complete");
                 loginClient.getClient().getData().setID(ID);
                 loginClient.getClient().getData().setPwd(pwd);
+                if(br.readLine().equals("ture"))loginClient.getClient().getData().setShop(true);
+                else loginClient.getClient().getData().setShop(false);
                 loginClient.getClient().loginComplete=true;
 
                  //여기서 현재화면 죽이고
                 Stage stage=(Stage)login.getScene().getWindow();
                 stage.close();
-
 
                 new MainClient(loginClient);
 
