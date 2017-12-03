@@ -115,6 +115,7 @@ class MainThread extends Thread{
         this.clientInfoList = clientInfoList;
 
 
+
         try{
             br = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));
             pw = new PrintWriter(this.sock.getOutputStream(),true);
@@ -188,13 +189,13 @@ class MainThread extends Thread{
             }
             String menuName= br.readLine();
             String menuPrice= br.readLine();
-            Menu tempMenu= new Menu(menuName, temp, Integer.parseInt(menuPrice));
-            temp.getItemlist().add(tempMenu);
+           // Menu tempMenu= new Menu(menuName, temp, menuPrice);
+           // temp.getItemlist().add(tempMenu);
 
             /**Save into file*/
             String filename = getClass().getResource("").getPath() + storeName + "_menu.txt";//file name= storeName_menu.txt
             BufferedWriter fw= new BufferedWriter(new FileWriter(filename, true));
-            fw.write(menuName+","+menuPrice+","+storeName+"\n");// save like : item name,1000,store name\n
+            fw.write(menuName+","+menuPrice+"\n");// save like : item name,1000,store name\n
             fw.close();
 
         }catch(Exception e){e.printStackTrace();}
@@ -214,62 +215,91 @@ class MainThread extends Thread{
             String[] arr= new String[4];
             for(int i=0; i<4;i++)
             arr[i]=br.readLine();
-            EventInfo tempEvent= new EventInfo(arr[0],arr[1],arr[2],arr[3]);
-//            temp.getEventList().add(tempEvent);
+            //EventInfo tempEvent= new EventInfo(arr[0],arr[1],arr[2],arr[3]);
+           // temp.getEventList().add(tempEvent);
             System.out.println("addded");
 
             String filename = getClass().getResource("").getPath() + temp.getStore_name() + "_event.txt";//file name= storeName_menu.txt
-            System.out.println(arr[0]+"|"+arr[1]+"|"+arr[2]+"|"+arr[3]);
+            System.out.println(arr[0]+"&@"+arr[1]+"&@"+arr[2]+"&@"+arr[3]);
             BufferedWriter fw= new BufferedWriter(new FileWriter(filename, true));
-            fw.write(arr[0]+"|"+arr[1]+"|"+arr[2]+"|"+arr[3]); //save like name|stat date|end date|contents
+            fw.write(arr[0]+"&@"+arr[1]+"&@"+arr[2]+"&@"+arr[3]+"\n"); //save like name|stat date|end date|contents
             fw.close();
         }catch(Exception e){e.printStackTrace();}
     }
 
     /** send Menu item to client*/
-    public void sendItemlist(){
+    public void loadItemlist(String storename){
 
-    }
-
-//    /**Delete Menu item*/
-//    public void deleteItem(String storeName, String itemName){
-//        try {
-//            Iterator it = this.storeList.iterator();
-//            Store temp = null;
-//            while (it.hasNext()) {
-//                temp = (Store) it.next();
-//                if (temp.getStore_name().equals(storeName)) break;
-//            }
-//              Menu tempItem=temp.getItem(itemName) ;
-//            temp.getItemlist().remove(tempItem);
-//
-//        }catch(Exception e){e.printStackTrace();}
-//    }
-    /**Enter Store*/
-    public void enterStore(){
-        Iterator it = this.storeList.iterator();
         try{
-            String storeName= br.readLine(); //recv Store name from Main_page
-            while(it.hasNext()){
-                Store temp= (Store)it.next();
-                if(temp.getStore_name().equals(storeName)){
-                    this.myStore=temp;
-                    this.myStore.addCustomer(sock);
-                    return;
-                }
+            Iterator it = this.storeList.iterator();
+            Store tempStore = null;
+            while (it.hasNext()) {
+                tempStore = (Store) it.next();
+                if (tempStore.getStore_name().equals(storename)) break;
             }
-        }catch(Exception e){
-            e.printStackTrace();
+            tempStore.getItemlist().clear();
+
+            String file= getClass().getResource("").getPath()+storename+"_menu.txt";
+            BufferedReader item_load= new BufferedReader(new FileReader(file));
+            String temp;
+            while((temp=item_load.readLine())!=null){
+                tempStore.getItemlist().add(temp);
+            }
+        }catch(Exception e){e.printStackTrace();}
+    }
+    public void sendItemlist(String storename){
+        String temp=null;
+        Iterator it = this.storeList.iterator();
+        Store tempStore = null;
+        while (it.hasNext()) {
+            tempStore = (Store) it.next();
+            if (tempStore.getStore_name().equals(storename)) break;
         }
+        Iterator iit= tempStore.getItemlist().iterator();
+        while(iit.hasNext()){
+            temp=iit.next().toString();
+            System.out.println(temp);
+            sendData(temp);
+        }
+        sendData("-1");
+    }
+    public void loadEventlist(String storename){
+        try{
+            Iterator it = this.storeList.iterator();
+            Store tempStore = null;
+            while (it.hasNext()) {
+                tempStore = (Store) it.next();
+                if (tempStore.getStore_name().equals(storename)) break;
+            }
+            tempStore.getEventList().clear();
+
+            String file= getClass().getResource("").getPath()+storename+"_event.txt";
+            BufferedReader item_load= new BufferedReader(new FileReader(file));
+            String temp;
+            while((temp=item_load.readLine())!=null){
+                tempStore.getEventList().add(temp);
+            }
+        }catch(Exception e){e.printStackTrace();}
+    }
+    public void sendEventlist(String storename){
+        String temp=null;
+        Iterator it = this.storeList.iterator();
+        Store tempStore = null;
+        while (it.hasNext()) {
+            tempStore = (Store) it.next();
+            if (tempStore.getStore_name().equals(storename)) break;
+        }
+        Iterator iit= tempStore.getEventList().iterator();
+        while(iit.hasNext()){
+            temp=iit.next().toString();
+            String[]arr= temp.split("&@");
+            System.out.println(arr[0]);
+            sendData(arr[0]);
+        }
+        sendData("-1");
     }
 
-    public void deleteStore(){
-        this.storeList.remove(myStore);
-    }
-    /** exit store*/
-    public void exitStore(){
-        myStore.deletCustomer(sock);
-    }
+
     /**Send store list */
     public void sendStoreList(){
         Iterator it= this.storeList.iterator();
@@ -277,22 +307,10 @@ class MainThread extends Thread{
             Store temp= (Store)it.next();
             System.out.println(temp.getStore_name());
             sendData(temp.getStore_name());
-//            sendData("["+temp.getLocation()+"]");
-//            sendData("["+temp.getCategory()+"]");
         }
         sendData("-1");
     }
-    /** Send client List*/
-    public void sendClientSocketList(){
-        Iterator it= this.clientSock_list.keySet().iterator();
 
-        while(it.hasNext()){
-            String ID=(String)it.next();
-            sendData(ID);
-            System.out.println(ID);
-        }
-        sendData("-1");
-    }
 
 
     /** Search Store by location*/
@@ -325,20 +343,13 @@ class MainThread extends Thread{
         System.out.println(name);
 
 
-//        sendStoreList();
-//        sendClientSocketList();
-
 
         while(true){
             int situation = Integer.parseInt(recvData());
             System.out.println(situation+"recved");
 
             switch (situation){
-                case -2: //terminate store
-                    deleteStore();
-                    exitStore();
-                    break;
-                case -1: //exit client
+               case -1: //exit client
                     this.clientSock_list.remove(this.name);
                     break;
                 case 0: //refresh
@@ -362,9 +373,11 @@ class MainThread extends Thread{
                     addEventItem(s_name);
                     this.s_name=null;
                     break;
-                case 4:
-                    System.out.println("only sendCliemtSocketList");
-                    sendClientSocketList();
+                case 4://load and send event
+                    this.s_name=recvData();
+                    loadEventlist(this.s_name);
+                    sendEventlist(this.s_name);
+                    this.s_name=null;
                     break;
                 case 5: //search specific store
                     System.out.println("send searched store data");
@@ -378,10 +391,12 @@ class MainThread extends Thread{
                     this.s_category=null;
                     this.s_owner=null;
                     break;
-                case 6: //add menu item
+                case 6: //load and send item
                     this.s_name=recvData();
-                    addMenuItem(s_name);
-
+                    loadItemlist(this.s_name);
+                    sendItemlist(this.s_name);
+                    this.s_name=null;
+                    break;
             }
         }
     }

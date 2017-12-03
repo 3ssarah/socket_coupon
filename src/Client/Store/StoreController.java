@@ -67,6 +67,27 @@ public class StoreController implements Initializable{
         eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
 
     }
+    public void setMenuListView(){
+        mainClient.sendData("6");
+        mainClient.sendData(store.getStore_name());
+
+        m_list.clear();
+        String temp;
+        while((temp=mainClient.recvData()).equals("-1")!=true){
+            m_list.add(temp);
+        }
+
+    }
+    public void setEventListView(){
+        mainClient.sendData("4");
+        mainClient.sendData(store.getStore_name());
+
+        e_list.clear();
+        String temp;
+        while((temp=mainClient.recvData()).equals("-1")!=true){
+            e_list.add(temp);
+        }
+    }
     public void settingLabel(){
         store_name.setText(store.getStore_name());
         type.setText(store.getCategory());

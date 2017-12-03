@@ -2,48 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45a5f132-bb2b-4ced-8c54-a817fad7be5b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/81CC.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/81CC_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/Bronze.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/Bronze_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/MainServer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/MainThread.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/Off the Record.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/Off the Record_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/StoreInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/TAKEN.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/TAKEN_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/caffe on the plan.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/caffe on the plan_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/감성다방.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/감성다방_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/궤도에 오르다.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/궤도에 오르다_comments.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/폼프리츠.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Server/store_info.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Client/Login/LoginController.class" afterPath="$PROJECT_DIR$/out/production/Gift_card/Client/Login/LoginController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/DialogController.class" afterPath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/DialogController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/MainController.class" afterPath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/MainController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Client/UserData.class" afterPath="$PROJECT_DIR$/out/production/Gift_card/Client/UserData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/MainFrame.fxml" afterPath="$PROJECT_DIR$/out/production/Gift_card/Client/Main_page/MainFrame.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/3ssarah.txt" afterPath="$PROJECT_DIR$/out/production/Gift_card/Server/3ssarah.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/member_info.txt" afterPath="$PROJECT_DIR$/out/production/Gift_card/Server/member_info.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/ssarah.txt" afterPath="$PROJECT_DIR$/out/production/Gift_card/Server/ssarah.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Gift_card/Server/store_info.txt" afterPath="$PROJECT_DIR$/out/production/Gift_card/Server/store_info.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Client.java" afterPath="$PROJECT_DIR$/src/Client/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Login/LoginController.java" afterPath="$PROJECT_DIR$/src/Client/Login/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Login/LoginFrame.fxml" afterPath="$PROJECT_DIR$/src/Client/Login/LoginFrame.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Main_page/DialogController.java" afterPath="$PROJECT_DIR$/src/Client/Main_page/DialogController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java" afterPath="$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Main_page/MainController.java" afterPath="$PROJECT_DIR$/src/Client/Main_page/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Main_page/MainFrame.fxml" afterPath="$PROJECT_DIR$/src/Client/Main_page/MainFrame.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Store/EventInfoController.java" afterPath="$PROJECT_DIR$/src/Client/Store/EventInfoController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Store/Event_information.fxml" afterPath="$PROJECT_DIR$/src/Client/Store/Event_information.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Store/Menu.java" afterPath="$PROJECT_DIR$/src/Client/Store/Menu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Store/Store.java" afterPath="$PROJECT_DIR$/src/Client/Store/Store.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/UserData.java" afterPath="$PROJECT_DIR$/src/Client/UserData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/LoginServer.java" afterPath="$PROJECT_DIR$/src/Server/LoginServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Store/StoreController.java" afterPath="$PROJECT_DIR$/src/Client/Store/StoreController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/MainServer.java" afterPath="$PROJECT_DIR$/src/Server/MainServer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -66,35 +28,35 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5635401">
+    <splitter split-orientation="horizontal" split-proportion="0.47276855">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="StoreController.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="StoreController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Client/Store/StoreController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="57">
-                  <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+                <state relative-caret-position="-494">
+                  <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
                   <folding>
                     <element signature="method#settingLabel#0;class#StoreController#0" expanded="false" />
+                    <element signature="method#changeToDownload#0;class#StoreController#0" expanded="false" />
                     <element signature="method#showEventDetails#0;class#StoreController#0" expanded="false" />
+                    <element signature="method#handleSendBtn#0;class#StoreController#0" expanded="false" />
                     <element signature="method#handleBackBtn#0;class#StoreController#0" expanded="false" />
+                    <element signature="method#setCommentsView#0;class#StoreController#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Client/Main_page/MainController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="58">
-                  <caret line="159" column="65" lean-forward="false" selection-start-line="159" selection-start-column="65" selection-end-line="159" selection-end-column="65" />
+                <state relative-caret-position="121">
+                  <caret line="96" column="0" lean-forward="true" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
                   <folding>
                     <element signature="method#MainController#0;class#MainController#0" expanded="false" />
-                    <element signature="method#handleSearch#0;class#MainController#0" expanded="false" />
-                    <element signature="method#showStoreDetails#0;class#MainController#0" expanded="false" />
-                    <element signature="method#recvStoreList#0;class#MainController#0" expanded="false" />
                     <element signature="method#recvInformation#0;class#MainController#0" expanded="false" />
-                    <element signature="e#5925#5947#0" expanded="true" />
+                    <element signature="e#6007#6029#0" expanded="true" />
                     <element signature="method#recvClientList#0;class#MainController#0" expanded="false" />
                     <element signature="method#F5#0;class#MainController#0" expanded="false" />
                     <element signature="method#sendData#0;class#MainController#0" expanded="false" />
@@ -104,21 +66,60 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Client/Store/MenuController.java">
+          <file leaf-file-name="EventDialog.fxml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Client/Main_page/EventDialog.fxml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="171">
-                  <caret line="10" column="61" lean-forward="true" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+                <state relative-caret-position="272">
+                  <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
+                  <folding />
+                </state>
+              </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ItemDialogController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-266">
+                  <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="EventInfoController.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Client/Store/EventInfoController.java">
+          <file leaf-file-name="Store.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Client/Store/Store.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="228">
-                  <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+                <state relative-caret-position="-483">
+                  <caret line="34" column="45" lean-forward="false" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#466#474#0" expanded="true" />
+                    <element signature="e#532#540#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Menu.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Client/Store/Menu.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-331">
+                  <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#1223#1224#0" expanded="true" />
+                    <element signature="e#1251#1252#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ChatServer.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Server/ChatServer.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="320">
+                  <caret line="61" column="45" lean-forward="true" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
@@ -128,64 +129,24 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ItemDialogController.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="116">
-                  <caret line="56" column="59" lean-forward="false" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MainClient.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Client/Main_page/MainClient.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="71">
-                  <caret line="60" column="12" lean-forward="true" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Store.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Client/Store/Store.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="95">
-                  <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-                  <folding>
-                    <element signature="e#464#470#0" expanded="true" />
-                    <element signature="e#531#542#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ChatServer.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Server/ChatServer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="282">
-                  <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="MainServer.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Server/MainServer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-69">
-                  <caret line="191" column="45" lean-forward="true" selection-start-line="191" selection-start-column="45" selection-end-line="191" selection-end-column="45" />
+                <state relative-caret-position="378">
+                  <caret line="294" column="42" lean-forward="true" selection-start-line="294" selection-start-column="42" selection-end-line="294" selection-end-column="42" />
                   <folding>
                     <element signature="e#536#542#0" expanded="true" />
                     <element signature="method#StoreInfo#0;class#StoreInfo#0" expanded="false" />
                     <element signature="method#hashMake#0;class#StoreInfo#0" expanded="false" />
                     <element signature="method#saveFile#0;class#StoreInfo#0" expanded="false" />
+                    <element signature="method#addMenuItem#0;class#MainThread#0" expanded="false" />
+                    <element signature="method#loadItemlist#0;class#MainThread#0" expanded="false" />
                     <element signature="method#sendItemlist#0;class#MainThread#0" expanded="false" />
-                    <element signature="e#7611#7638#0" expanded="false" />
-                    <element signature="e#12656#12663#0" expanded="true" />
-                    <element signature="e#12733#12749#0" expanded="true" />
-                    <element signature="e#12809#12817#0" expanded="true" />
+                    <element signature="method#loadEventlist#0;class#MainThread#0" expanded="false" />
+                    <element signature="method#sendSearchedStoreList#0;class#MainThread#0" expanded="false" />
+                    <element signature="e#13537#13544#0" expanded="true" />
+                    <element signature="e#13614#13630#0" expanded="true" />
+                    <element signature="e#13690#13698#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -256,7 +217,6 @@
         <option value="$PROJECT_DIR$/src/Client/Main_page/StoreDialogFrame.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/MainClient.java" />
         <option value="$PROJECT_DIR$/src/Client/Store/MenuFrame.fxml" />
-        <option value="$PROJECT_DIR$/src/Client/Store/Menu.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/ItemDialog.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/EventDialog.fxml" />
         <option value="$PROJECT_DIR$/src/Client/Comment/ChatClient.java" />
@@ -268,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/Client/Download/DownloadController.java" />
         <option value="$PROJECT_DIR$/src/Client/Store/ChatClient.java" />
         <option value="$PROJECT_DIR$/src/Client/Store/StoreFrame.fxml" />
-        <option value="$PROJECT_DIR$/src/Client/Store/StoreController.java" />
         <option value="$PROJECT_DIR$/src/Server/ChatServer.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/MainStage.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/MainFrame.fxml" />
@@ -280,11 +239,13 @@
         <option value="$PROJECT_DIR$/src/Client/UserData.java" />
         <option value="$PROJECT_DIR$/src/Client/Store/EventInfo.java" />
         <option value="$PROJECT_DIR$/src/Client/Store/EventInfoController.java" />
-        <option value="$PROJECT_DIR$/src/Client/Store/Store.java" />
-        <option value="$PROJECT_DIR$/src/Server/MainServer.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/DialogController.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Client/Store/Menu.java" />
+        <option value="$PROJECT_DIR$/src/Client/Store/Store.java" />
+        <option value="$PROJECT_DIR$/src/Client/Store/StoreController.java" />
         <option value="$PROJECT_DIR$/src/Client/Main_page/MainController.java" />
+        <option value="$PROJECT_DIR$/src/Server/MainServer.java" />
       </list>
     </option>
   </component>
@@ -564,8 +525,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.MainServer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.LoginClient" />
+        <item index="0" class="java.lang.String" itemvalue="Application.LoginClient" />
+        <item index="1" class="java.lang.String" itemvalue="Application.MainServer" />
         <item index="2" class="java.lang.String" itemvalue="Application.LoginServer" />
         <item index="3" class="java.lang.String" itemvalue="Application.ChatServer" />
         <item index="4" class="java.lang.String" itemvalue="Application.ImgServer" />
@@ -611,12 +572,12 @@
       <workItem from="1512189593006" duration="41348000" />
       <workItem from="1512295796859" duration="13875000" />
       <workItem from="1512310315129" duration="796000" />
-      <workItem from="1512311468510" duration="10578000" />
+      <workItem from="1512311468510" duration="13970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253842000" />
+    <option name="totallyTimeSpent" value="257234000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -638,9 +599,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.51894563" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5255354" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27512357" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38550246" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2473525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -696,7 +657,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Server/MainServer.java</url>
+          <line>204</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -739,11 +708,14 @@
             <element signature="method#StoreInfo#0;class#StoreInfo#0" expanded="false" />
             <element signature="method#hashMake#0;class#StoreInfo#0" expanded="false" />
             <element signature="method#saveFile#0;class#StoreInfo#0" expanded="false" />
+            <element signature="method#addMenuItem#0;class#MainThread#0" expanded="false" />
+            <element signature="method#loadItemlist#0;class#MainThread#0" expanded="false" />
             <element signature="method#sendItemlist#0;class#MainThread#0" expanded="false" />
-            <element signature="e#7611#7638#0" expanded="false" />
-            <element signature="e#12656#12663#0" expanded="true" />
-            <element signature="e#12733#12749#0" expanded="true" />
-            <element signature="e#12809#12817#0" expanded="true" />
+            <element signature="method#loadEventlist#0;class#MainThread#0" expanded="false" />
+            <element signature="method#sendSearchedStoreList#0;class#MainThread#0" expanded="false" />
+            <element signature="e#13537#13544#0" expanded="true" />
+            <element signature="e#13614#13630#0" expanded="true" />
+            <element signature="e#13690#13698#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -805,16 +777,6 @@
         <state relative-caret-position="280">
           <caret line="33" column="88" lean-forward="true" selection-start-line="33" selection-start-column="88" selection-end-line="33" selection-end-column="88" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Main_page/EventDialog.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
@@ -1007,14 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Store/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Store/MenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1038,25 +992,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="71">
           <caret line="60" column="12" lean-forward="true" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Store/Store.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="22" column="41" lean-forward="false" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-          <folding>
-            <element signature="e#464#470#0" expanded="true" />
-            <element signature="e#531#542#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/ChatServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1097,29 +1032,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Store/StoreController.java">
+    <entry file="file://$PROJECT_DIR$/src/Server/ChatServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="320">
+          <caret line="61" column="45" lean-forward="true" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Store/Store.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-483">
+          <caret line="34" column="45" lean-forward="false" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
           <folding>
-            <element signature="method#settingLabel#0;class#StoreController#0" expanded="false" />
-            <element signature="method#showEventDetails#0;class#StoreController#0" expanded="false" />
-            <element signature="method#handleBackBtn#0;class#StoreController#0" expanded="false" />
+            <element signature="e#466#474#0" expanded="true" />
+            <element signature="e#532#540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Store/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="e#1251#1252#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Main_page/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="159" column="65" lean-forward="false" selection-start-line="159" selection-start-column="65" selection-end-line="159" selection-end-column="65" />
+        <state relative-caret-position="121">
+          <caret line="96" column="0" lean-forward="true" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding>
             <element signature="method#MainController#0;class#MainController#0" expanded="false" />
-            <element signature="method#handleSearch#0;class#MainController#0" expanded="false" />
-            <element signature="method#showStoreDetails#0;class#MainController#0" expanded="false" />
-            <element signature="method#recvStoreList#0;class#MainController#0" expanded="false" />
             <element signature="method#recvInformation#0;class#MainController#0" expanded="false" />
-            <element signature="e#5925#5947#0" expanded="true" />
+            <element signature="e#6007#6029#0" expanded="true" />
             <element signature="method#recvClientList#0;class#MainController#0" expanded="false" />
             <element signature="method#F5#0;class#MainController#0" expanded="false" />
             <element signature="method#sendData#0;class#MainController#0" expanded="false" />
@@ -1128,28 +1078,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Main_page/EventDialog.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Main_page/ItemDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="56" column="59" lean-forward="false" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+        <state relative-caret-position="-266">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Store/StoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-494">
+          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <folding>
+            <element signature="method#settingLabel#0;class#StoreController#0" expanded="false" />
+            <element signature="method#changeToDownload#0;class#StoreController#0" expanded="false" />
+            <element signature="method#showEventDetails#0;class#StoreController#0" expanded="false" />
+            <element signature="method#handleSendBtn#0;class#StoreController#0" expanded="false" />
+            <element signature="method#handleBackBtn#0;class#StoreController#0" expanded="false" />
+            <element signature="method#setCommentsView#0;class#StoreController#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/MainServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="191" column="45" lean-forward="true" selection-start-line="191" selection-start-column="45" selection-end-line="191" selection-end-column="45" />
+        <state relative-caret-position="378">
+          <caret line="294" column="42" lean-forward="true" selection-start-line="294" selection-start-column="42" selection-end-line="294" selection-end-column="42" />
           <folding>
             <element signature="e#536#542#0" expanded="true" />
             <element signature="method#StoreInfo#0;class#StoreInfo#0" expanded="false" />
             <element signature="method#hashMake#0;class#StoreInfo#0" expanded="false" />
             <element signature="method#saveFile#0;class#StoreInfo#0" expanded="false" />
+            <element signature="method#addMenuItem#0;class#MainThread#0" expanded="false" />
+            <element signature="method#loadItemlist#0;class#MainThread#0" expanded="false" />
             <element signature="method#sendItemlist#0;class#MainThread#0" expanded="false" />
-            <element signature="e#7611#7638#0" expanded="false" />
-            <element signature="e#12656#12663#0" expanded="true" />
-            <element signature="e#12733#12749#0" expanded="true" />
-            <element signature="e#12809#12817#0" expanded="true" />
+            <element signature="method#loadEventlist#0;class#MainThread#0" expanded="false" />
+            <element signature="method#sendSearchedStoreList#0;class#MainThread#0" expanded="false" />
+            <element signature="e#13537#13544#0" expanded="true" />
+            <element signature="e#13614#13630#0" expanded="true" />
+            <element signature="e#13690#13698#0" expanded="true" />
           </folding>
         </state>
       </provider>

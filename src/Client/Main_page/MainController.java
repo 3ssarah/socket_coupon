@@ -105,8 +105,11 @@ public class MainController  implements Initializable  {
             chatClient.sendData("2");
             chatClient.sendData(store1.getStore_name());
             storeCon.setStore(store1);
+
             storeCon.settingLabel();
             storeCon.setCommentsView();
+            storeCon.setEventListView();
+            storeCon.setMenuListView();
             // storeCon.setCommentsView();
 
             System.out.println("set store and mainClient");

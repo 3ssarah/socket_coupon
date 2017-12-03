@@ -6,17 +6,23 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Menu {
-    private int number;
+
     private String product_name=null;
-    private int price;
+    private String price;
     private String type="Product";
     private final  int day = 30; //term of validity ==1month
     private Store store=null;
 
-    public Menu(String product_name, Store store, int price){
-        this.number=number;
+    public Menu(String product_name, Store store, String price){
+
         this.product_name=product_name;
         this.store=store;
+        this.type="Product";
+        this.price=price;
+    }
+    public Menu(String product_name, String price){
+
+        this.product_name=product_name;
         this.type="Product";
         this.price=price;
     }
@@ -41,11 +47,11 @@ public class Menu {
         this.product_name = product_name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

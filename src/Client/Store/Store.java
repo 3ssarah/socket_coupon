@@ -16,8 +16,8 @@ public class Store {
     private ArrayList<Socket> customer= null;
 
 
-    private ArrayList<Menu> itemlist= new ArrayList<Menu>();
-    private ArrayList<EventInfo> eventList= new ArrayList<EventInfo>();
+    private ArrayList<String> itemlist= new ArrayList<String>();
+    private ArrayList<String> eventList= new ArrayList<String>();
 
 
     public Store(String store_name, String category, String store_phone, String location,String owner){
@@ -28,19 +28,19 @@ public class Store {
         this.owner=owner;
     }
 
-    public ArrayList<EventInfo> getEventList() {
+    public ArrayList<String> getEventList() {
         return eventList;
     }
 
-    public void setEventList(ArrayList<EventInfo> eventList) {
+    public void setEventList(ArrayList<String> eventList) {
         this.eventList = eventList;
     }
 
-    public ArrayList<Menu> getItemlist() {
+    public ArrayList<String> getItemlist() {
         return itemlist;
     }
 
-    public void setItemlist(ArrayList<Menu> itemlist) {
+    public void setItemlist(ArrayList<String> itemlist) {
         this.itemlist = itemlist;
     }
 
