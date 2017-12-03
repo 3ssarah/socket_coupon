@@ -75,6 +75,7 @@ class LoginThread extends Thread{
     private Socket sock=null;
     private Vector<Socket> vec=null;
     private MemberInfo member;
+    private String storename;
 
     public LoginThread(Socket sock, Vector<Socket> vec, MemberInfo member){
         this.sock=sock;
@@ -87,6 +88,7 @@ class LoginThread extends Thread{
         String pwd =null;
         String phoneNumber=null;
         String shop=null;
+        String[] infoTemp;
 
         int mode;
         BufferedReader br=null;
@@ -132,7 +134,9 @@ class LoginThread extends Thread{
                         case 1:
                             pw.println("Login is completed!");
                             pw.println("0");
-                            pw.println(checkOwner(id));
+                            infoTemp=checkOwner(id);
+                            pw.println(infoTemp[0]);//send shop owner(true or false)
+                            pw.println(infoTemp[1]);//send store name
                             member.saveFile();
                             vec.remove(sock);
                             return;
@@ -169,18 +173,26 @@ class LoginThread extends Thread{
             System.out.println(e.getMessage());
         }
     }
-    public String checkOwner(String ID){
+    public String[] checkOwner(String ID){
         String filename = getClass().getResource("").getPath()+ID+".txt";
-        String check=null;
+        String[] temp= new String[2];
+
         try{
             BufferedReader br= new BufferedReader(new FileReader(filename));
-            br.readLine();
-            check=br.readLine();
+            br.readLine();//phone number
+            temp[0]=br.readLine();
+            String t;
+            if((t=br.readLine())!=null)temp[1]=t;
+            else temp[1]=null;
+
+
         }catch(Exception e){
             e.printStackTrace();
         }
-        return check;
+        return temp;
     }
+
+
 }
 
 public class LoginServer{

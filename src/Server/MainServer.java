@@ -1,6 +1,7 @@
 package Server;
 
 import Client.Client;
+import Client.Store.EventInfo;
 import Client.Store.Menu;
 import Client.Store.Store;
 
@@ -151,13 +152,17 @@ class MainThread extends Thread{
             pw.println("Store Register Complete");
 
             /**save into a file*/
-            String filename= getClass().getResource("").getPath()+storeName+".txt";
-            BufferedWriter fw= new BufferedWriter(new FileWriter(filename));
+            String filename= getClass().getResource("").getPath();
+            BufferedWriter fw= new BufferedWriter(new FileWriter(filename+storeName+".txt"));
             fw.write(name+"\n");
             fw.write(storeCategory+"\n");
             fw.write(storeLocation+"\n");
             fw.write(storePhone+"\n");
             fw.close();
+            /**save into a member's file*/
+            BufferedWriter mfw= new BufferedWriter(new FileWriter(filename+name+".txt",true));
+            mfw.write(storeName);
+            mfw.close();
 
             /**make Store Object*/
             myStore= new Store(storeName,storeCategory,storePhone,storeLocation,name);
@@ -192,6 +197,32 @@ class MainThread extends Thread{
             fw.write(menuName+","+menuPrice+","+storeName+"\n");// save like : item name,1000,store name\n
             fw.close();
 
+        }catch(Exception e){e.printStackTrace();}
+    }
+    /**Add Event Item*/
+    public void addEventItem(String storeName){
+        try {
+            System.out.println("add event function");
+            Iterator it = this.storeList.iterator();
+            Store temp = null;
+            while (it.hasNext()) {
+                temp = (Store) it.next();
+                if (temp.getStore_name().equals(storeName)) break;
+            }
+            System.out.println("find store"+temp.getStore_name());
+
+            String[] arr= new String[4];
+            for(int i=0; i<4;i++)
+            arr[i]=br.readLine();
+            EventInfo tempEvent= new EventInfo(arr[0],arr[1],arr[2],arr[3]);
+//            temp.getEventList().add(tempEvent);
+            System.out.println("addded");
+
+            String filename = getClass().getResource("").getPath() + temp.getStore_name() + "_event.txt";//file name= storeName_menu.txt
+            System.out.println(arr[0]+"|"+arr[1]+"|"+arr[2]+"|"+arr[3]);
+            BufferedWriter fw= new BufferedWriter(new FileWriter(filename, true));
+            fw.write(arr[0]+"|"+arr[1]+"|"+arr[2]+"|"+arr[3]); //save like name|stat date|end date|contents
+            fw.close();
         }catch(Exception e){e.printStackTrace();}
     }
 
@@ -301,6 +332,7 @@ class MainThread extends Thread{
         while(true){
             int situation = Integer.parseInt(recvData());
             System.out.println(situation+"recved");
+
             switch (situation){
                 case -2: //terminate store
                     deleteStore();
@@ -319,11 +351,17 @@ class MainThread extends Thread{
                     stores.saveFile();
                     break;
                 case 2:
-                    exitStore();
+                    this.s_name=recvData();
+                    addMenuItem(s_name);
+                    this.s_name=null;
                     break;
                 case 3:
-                  enterStore();
-                  break;
+                    System.out.println("it's time to add Event");
+                    this.s_name=recvData();
+                    System.out.println(s_name);
+                    addEventItem(s_name);
+                    this.s_name=null;
+                    break;
                 case 4:
                     System.out.println("only sendCliemtSocketList");
                     sendClientSocketList();
@@ -366,7 +404,8 @@ public class MainServer{
 
             /**Load store information to MainServer*/
             System.out.println("loadStorestoServer function!");
-            String fileName= MainServer.class.getResource("").getPath();
+            String fileName=MainServer.class.getResource("").getPath();
+
             try {
                 BufferedReader fr = new BufferedReader(new FileReader(stores.getFileName_store()));
                 String store_name,owner,store_location, store_phone,store_category;

@@ -1,5 +1,6 @@
 package Client.Main_page;
 
+import Client.Store.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -25,6 +26,8 @@ public class DialogController {
     Alert alert;
 
     private Client client;
+    private MainController mainController;
+    public void setMainController(MainController mainController){this.mainController=mainController;}
 
 
     @FXML public void initialize(URL location, ResourceBundle resources){
@@ -41,6 +44,8 @@ public class DialogController {
     }
     @FXML
     public void handleOk(ActionEvent event){
+
+
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(client.getLoginSock().getInputStream()));
@@ -50,6 +55,10 @@ public class DialogController {
         sendData(category_f.getText());
         sendData(location_f.getText());
         sendData(phone_f.getText());
+
+        mainController.getName_store().setText(name_f.getText());
+        Store tempstore=new Store(name_f.getText(), category_f.getText(), phone_f.getText(), location_f.getText(), client.getData().getID());
+        client.getData().setStore(tempstore);
 
         try{
             alert= new Alert(Alert.AlertType.CONFIRMATION);
@@ -62,6 +71,7 @@ public class DialogController {
         }catch(Exception e){
             e.printStackTrace();
         }
+        mainController.getAddStoreBtn().setDisable(true);
         Stage stage= (Stage)OKBtn.getScene().getWindow();
         stage.close();
     }

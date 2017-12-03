@@ -16,8 +16,9 @@ public class Store {
     private ArrayList<Socket> customer= null;
 
 
-    private ArrayList<Menu> itemlist=null;
-    private Hashtable<Integer, Menu> menu_table=null;
+    private ArrayList<Menu> itemlist= new ArrayList<Menu>();
+    private ArrayList<EventInfo> eventList= new ArrayList<EventInfo>();
+
 
     public Store(String store_name, String category, String store_phone, String location,String owner){
         this.store_name=store_name;
@@ -25,6 +26,14 @@ public class Store {
         this.store_phone=store_phone;
         this.location=location;
         this.owner=owner;
+    }
+
+    public ArrayList<EventInfo> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(ArrayList<EventInfo> eventList) {
+        this.eventList = eventList;
     }
 
     public ArrayList<Menu> getItemlist() {
@@ -88,6 +97,15 @@ public class Store {
         while(it.hasNext()){
              temp= (Menu)it.next();
              if(temp.getProduct_name().equals(itemName)) return temp;
+        }
+        return temp;
+    }
+    public EventInfo getEventItem(String eventName){
+        Iterator it= eventList.iterator();
+        EventInfo temp=null;
+        while(it.hasNext()){
+            temp=(EventInfo)it.next();
+            if(temp.getEvnetName().equals(eventName))return temp;
         }
         return temp;
     }

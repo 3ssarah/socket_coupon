@@ -26,20 +26,22 @@ public class ItemDialogController {
 
     /**MenuDialog handler*/
     public void handleOk(ActionEvent event){
-        mainClient.sendData(item_f.getText());
-        mainClient.sendData(price_f.getText());
-        try{
-//            alert= new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Look!");
-//            alert.setHeaderText(mainClient.recvData());
-//            alert.setContentText(":)");
-//            alert.showAndWait();
-            popAlert();
+        mainClient.sendData(mainClient.getClient().getData().getStoreNAme());//send store name
 
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        mainClient.sendData(item_f.getText());//send item name
+        mainClient.sendData(price_f.getText());//send item price
+//        try{
+////            alert= new Alert(Alert.AlertType.CONFIRMATION);
+////            alert.setTitle("Look!");
+////            alert.setHeaderText(mainClient.recvData());
+////            alert.setContentText(":)");
+////            alert.showAndWait();
+//            popAlert();
+//
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
         Stage stage= (Stage)OKBtn.getScene().getWindow();
         stage.close();
     }
@@ -52,17 +54,27 @@ public class ItemDialogController {
     /**EventDialog handler*/
     public void handleEventOk(ActionEvent event){
 
+        mainClient.sendData(mainClient.getClient().getData().getStoreNAme());//send store name
+
+        String temp=contents.getText();
+        String[] arr= temp.split("\n");
+        temp=arr[0];
+        for(int i=1; i<arr.length;i++)
+            temp+=arr[i];
+        System.out.println(temp);
+
         mainClient.sendData(eventName.getText());
         mainClient.sendData(startDate.getText());
         mainClient.sendData(endDate.getText());
-        mainClient.sendData(contents.getText());
+        mainClient.sendData(temp);
 
-        try{
-            popAlert();
 
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            popAlert();
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
         Stage stage= (Stage)OKBtn_e.getScene().getWindow();
         stage.close();
     }

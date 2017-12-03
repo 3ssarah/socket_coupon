@@ -3,6 +3,7 @@ package Client.Main_page;
 
 
 import Client.Store.ChatClient;
+import Client.Store.EventInfoController;
 import Client.Store.Store;
 import Client.Store.StoreController;
 import javafx.beans.value.ChangeListener;
@@ -37,10 +38,11 @@ public class MainController  implements Initializable  {
     @FXML private ListView<String> listViewBox;
     @FXML private Button searchBtn;
     ObservableList<String> storelist= FXCollections.observableArrayList();
+    @FXML Label name_store;
     /**tab: my_page*/
 
     /**tab: setting*/
-    @FXML private Button modifyBtn, addEventBtn, addMenuBtn, seeMenuBtn;
+    @FXML private Button addStoreBtn, addEventBtn, addMenuBtn, seeMenuBtn;
 
 
     /**참조하기 위한 객체*/
@@ -50,18 +52,16 @@ public class MainController  implements Initializable  {
     private static DialogController dialogCon;
     private static StoreController storeCon;
     private static ItemDialogController itemCon;
-    private Store store1=null;
+     private Store store1=null;
     private ArrayList<String> clientList=null;
 
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
     public void setClient(Client client){this.client=client;}
+    public Label getName_store(){return this.name_store;}
+    public Button getAddStoreBtn(){return this.addStoreBtn;}
     public MainController(){
         System.out.println("MainController COnstructor");
         controller=this;
-
-
-
-
     }
 
     @FXML public void initialize(URL location, ResourceBundle resources) {
@@ -69,51 +69,27 @@ public class MainController  implements Initializable  {
         System.out.println("initialize--");
         listViewBox.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showStoreDetails(newValue));
         System.out.println("list view setting");
+    }
 
-//        listViewBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                System.out.println("ListView selection newVlaue:"+newValue+" old value: "+oldValue);
-//
-//                sendData("5");//ask server to send specific store's information
-//                recvInformation(newValue);
-//
-////                Stage storepage= new Stage();
-////                storepage.initOwner(mainClient.getPrimaryStage());
-////                storepage.setTitle(searched.getStore_name()+"store page");
-//
-//
-//                sendData("5");
-//                try{
-//                    FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-//                    Parent storepage= loader.load();
-//
-//                    storeCon= loader.<StoreController>getController();
-//                    storeCon.setMainClient(mainClient);
-//                    storeCon.setStore(store1);
-//                    System.out.println("set store and mainClient");
-//
-//                    StackPane root=(StackPane)listViewBox.getScene().getRoot();
-//                    root.getChildren().add(storepage);
-////                    Scene s= new Scene(parent);
-////                    storepage.setScene(s);
-////                    storepage.show();
-//
-//
-//                }catch(Exception e){e.printStackTrace();}
-//
-//            }
-//        });
 
+
+
+    /**
+     * First tab: stores_tab Event Handler
+     *                                      **/
+    public void handleSearch(ActionEvent event){
+
+        System.out.println("handleSearch Function");
+        recvStoreList();
+        listViewBox.setItems(storelist);
+
+
+        System.out.println("recvStore done1!!");
+
+        //recvClientList();
 
 
     }
-    public void checkOwner(){
-
-    if( mainClient.getClient().getData().isShop()==false) setting_tab.setDisable(true);
-    else setting_tab.setDisable(false);
-    }
-
     public void showStoreDetails(String newValue){
         try{
             sendData("5");
@@ -131,7 +107,7 @@ public class MainController  implements Initializable  {
             storeCon.setStore(store1);
             storeCon.settingLabel();
             storeCon.setCommentsView();
-           // storeCon.setCommentsView();
+            // storeCon.setCommentsView();
 
             System.out.println("set store and mainClient");
 
@@ -145,146 +121,6 @@ public class MainController  implements Initializable  {
         }catch(Exception e){e.printStackTrace();}
 
     }
-
-
-
-//    public void changeToMenu(String newValue){
-//        sendData("5");//ask server to send specific store's information
-//        recvInformation(newValue);
-//
-//        Stage storepage= new Stage();
-//        storepage.initOwner(mainClient.getPrimaryStage());
-//        storepage.setTitle(store1.getStore_name()+"store page");
-//
-//        try{
-//            FXMLLoader loader= new FXMLLoader(getClass().getResource("../Store/StoreFrame.fxml"));
-//            Parent parent= loader.load();
-//
-//            storeCon= loader.<StoreController>getController();
-//            storeCon.setMainClient(mainClient);
-//            storeCon.setStore(store1);
-//
-//            System.out.println("set store and mainClient");
-//
-//            Scene s= new Scene(parent);
-//            storepage.setScene(s);
-//            storepage.show();
-//
-//
-//        }catch(Exception e){e.printStackTrace();}
-//
-//    }
-    /** First tab: stores_tab Event Handler **/
-    public void handleSearch(ActionEvent event){
-
-        System.out.println("handleSearch Function");
-        recvStoreList();
-        listViewBox.setItems(storelist);
-
-
-        System.out.println("recvStore done1!!");
-
-        //recvClientList();
-
-
-    }
-
-    /** Third tab: setting_tab Event Handler **/
-    public void handleAddMenuBtn(ActionEvent event){
-        try{
-            sendData("6");//send signal add item
-            Stage menuDialog = new Stage();
-            menuDialog.initOwner(mainClient.getPrimaryStage());
-            menuDialog.setTitle("Add Menu item");
-
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("ItemDialog.fxml"));
-            Parent parent= loader.load();
-
-            itemCon= loader.<ItemDialogController>getController();
-            itemCon.setMainClient(mainClient);
-
-            Scene s = new Scene(parent);
-            menuDialog.setScene(s);
-            menuDialog.setResizable(false);
-            menuDialog.show();
-
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-
-    }
-    public void handleAddEventBtn(ActionEvent event){
-        try{
-            sendData("6");//send signal add item
-            Stage eventDialog = new Stage();
-            eventDialog.initOwner(mainClient.getPrimaryStage());
-            eventDialog.setTitle("Add Menu item");
-
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("EventDialog.fxml"));
-            Parent parent= loader.load();
-
-            itemCon= loader.<ItemDialogController>getController();
-            itemCon.setMainClient(mainClient);
-
-            Scene s = new Scene(parent);
-            eventDialog.setScene(s);
-            eventDialog.setResizable(false);
-            eventDialog.show();
-
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-    }
-
-    /** Second tab: my_tab Event Handler **/
-
-
-    /** First tab: stores_tab Event Handler functions **/
-
-    public void modifyStore(ActionEvent  event){
-
-
-        try{
-            sendData("1");//send signal add store
-            Stage dialog= new Stage();
-            dialog.initOwner(mainClient.getPrimaryStage());
-            dialog.setTitle("Add Store");
-
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("StoreDialogFrame.fxml"));
-            Parent parent= loader.load();
-
-            dialogCon= loader.<DialogController>getController();
-            dialogCon.setClient(client);
-
-            Scene s = new Scene(parent);
-            dialog.setScene(s);
-            dialog.setResizable(false);
-            dialog.show();
-
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-
-    }
-
-    /** add store*/
-    public void addStore(String name, String category, String location, String phone){
-        //send store basic information
-        sendData(name);
-       sendData(category);
-        sendData(location);
-        sendData(phone);
-    }
-
     /** recv Store list__signal:0*/
     public void recvStoreList() {
         sendData("0");
@@ -315,6 +151,108 @@ public class MainController  implements Initializable  {
 
 
     }
+    /** Second tab: my_tab Event Handler **/
+    /**
+     * Third tab: setting_tab Event Handler
+     *                                         **/
+    public void handleAddMenuBtn(ActionEvent event){
+        try{
+            sendData("2");//send signal to server2: add menu item
+            Stage menuDialog = new Stage();
+            menuDialog.initOwner(mainClient.getPrimaryStage());
+            menuDialog.setTitle("Add Menu item");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("ItemDialog.fxml"));
+            Parent parent= loader.load();
+
+            itemCon= loader.<ItemDialogController>getController();
+            itemCon.setMainClient(mainClient);
+
+            Scene s = new Scene(parent);
+            menuDialog.setScene(s);
+            menuDialog.setResizable(false);
+            menuDialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+    public void handleAddEventBtn(ActionEvent event){
+        try{
+            sendData("3");
+            Stage eventDialog = new Stage();
+            eventDialog.initOwner(mainClient.getPrimaryStage());
+            eventDialog.setTitle("Add Event");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("EventDialog.fxml"));
+            Parent parent= loader.load();
+
+            itemCon= loader.<ItemDialogController>getController();
+            itemCon.setMainClient(mainClient);
+
+            Scene s = new Scene(parent);
+            eventDialog.setScene(s);
+            eventDialog.setResizable(false);
+            eventDialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+    public void modifyStore(ActionEvent  event){
+
+
+        try{
+            sendData("1");//send signal add store
+            Stage dialog= new Stage();
+            dialog.initOwner(mainClient.getPrimaryStage());
+            dialog.setTitle("Add Store");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("StoreDialogFrame.fxml"));
+            Parent parent= loader.load();
+
+            dialogCon= loader.<DialogController>getController();
+            dialogCon.setClient(client);
+            dialogCon.setMainController(this);
+
+            Scene s = new Scene(parent);
+            dialog.setScene(s);
+            dialog.setResizable(false);
+            dialog.show();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+    public void checkOwner(){
+
+        if( mainClient.getClient().getData().isShop()==true){
+            setting_tab.setDisable(false);
+            String flag=null;
+            if((flag=mainClient.getClient().getData().getStoreNAme()).equals("null")!=true){
+                name_store.setText(flag);
+                addStoreBtn.setDisable(true);
+            }
+
+        }
+        else setting_tab.setDisable(true);
+    }
+
+
+
+
+
     /**recv Client list __signal:0*/
     public void recvClientList() {
         sendData("4");
@@ -334,11 +272,6 @@ public class MainController  implements Initializable  {
 
             //기존의 화면 지우고 다시 불러와야 함
     }
-
-
-
-
-
     /** send Data */
     public void sendData(String str){
 

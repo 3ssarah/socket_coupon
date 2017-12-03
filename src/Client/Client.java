@@ -25,6 +25,7 @@ public class Client {
         this.data.setID(ID);
         this.data.setPwd(pwd);
         this.loginSock=loginSock;
+
     }
 
     public Socket getLoginSock() {

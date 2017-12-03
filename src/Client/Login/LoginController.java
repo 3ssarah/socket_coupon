@@ -64,6 +64,7 @@ public class LoginController  {
         loginClient.sendData("1");//send Log-in signal
         String ID= id_f.getText();
         String pwd= pwd_f.getText();
+        String temp=null;
 
         BufferedReader br= null;
 
@@ -92,8 +93,9 @@ public class LoginController  {
                 System.out.println("login complete");
                 loginClient.getClient().getData().setID(ID);
                 loginClient.getClient().getData().setPwd(pwd);
-                if(br.readLine().equals("ture"))loginClient.getClient().getData().setShop(true);
+                if(br.readLine().equals("true"))loginClient.getClient().getData().setShop(true);
                 else loginClient.getClient().getData().setShop(false);
+                if((temp=br.readLine())!=null)loginClient.getClient().getData().setStoreNAme(temp);
                 loginClient.getClient().loginComplete=true;
 
                  //여기서 현재화면 죽이고

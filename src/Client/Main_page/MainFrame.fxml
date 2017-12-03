@@ -45,27 +45,7 @@
                </children>
             </AnchorPane>
          </content></Tab>
-    <Tab fx:id="my_tab" text="Mypage">
-         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="65.0" layoutY="54.0" text="Purchase Record">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TableView layoutX="38.0" layoutY="95.0" prefHeight="374.0" prefWidth="669.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="No." />
-                      <TableColumn prefWidth="220.0" text="Product Name" />
-                        <TableColumn prefWidth="71.0" text="Price" />
-                        <TableColumn prefWidth="79.0" text="Category" />
-                        <TableColumn prefWidth="116.0" text="Store name" />
-                        <TableColumn prefWidth="107.0" text="Date" />
-                    </columns>
-                  </TableView>
-               </children></AnchorPane>
-         </content></Tab>
+
       <Tab fx:id="setting_tab" text="Store setting" >
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -80,8 +60,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="modifyBtn" onAction="#modifyStore" layoutX="631.0" layoutY="38.0" mnemonicParsing="false" text="Modify" />
-                  <Label layoutX="163.0" layoutY="36.0" prefHeight="27.0" prefWidth="419.0" text="NAME">
+                  <Button fx:id="addStoreBtn" onAction="#modifyStore" layoutX="631.0" layoutY="38.0" mnemonicParsing="false" text="Add store" />
+                  <Label fx:id="name_store" layoutX="163.0" layoutY="36.0" prefHeight="27.0" prefWidth="419.0" text="NAME">
                      <font>
                         <Font name="Arial Bold Italic" size="24.0" />
                      </font>

@@ -1,5 +1,7 @@
 package Client;
 
+import Client.Store.Store;
+
 public class UserData {
 
 
@@ -8,17 +10,36 @@ public class UserData {
     private String phone=null;
     private int balance = 0;
     private boolean shop;
+    private Store store=null;
+    private String storeNAme=null;
 
     public UserData(String ID, String pwd, String phone, boolean shop){
         this.ID=ID;
         this.pwd=pwd;
         this.phone=phone;
         this.shop=shop;
+
     }
 
     public UserData(String ID, String pwd){
         this.ID=ID;
         this.pwd=pwd;
+    }
+
+    public String getStoreNAme() {
+        return storeNAme;
+    }
+
+    public void setStoreNAme(String storeNAme) {
+        this.storeNAme = storeNAme;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public String getID() {

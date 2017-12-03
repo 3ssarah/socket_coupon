@@ -4,28 +4,25 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-
-<StackPane prefHeight="522.0" prefWidth="340"  xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="Client.Login.LoginController">
+<StackPane prefHeight="522.0" prefWidth="340" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Login.LoginController">
    <children>
-   <AnchorPane prefHeight="522.0" prefWidth="340" style="-fx-background-color: white;"  >
+   <AnchorPane prefHeight="522.0" prefWidth="340" style="-fx-background-color: white;">
 
             <Label layoutX="87.0" layoutY="329.0" text="ID" />
             <Label layoutX="60.0" layoutY="358.0" text="Password" />
             <TextField fx:id="id_f" layoutX="140.0" layoutY="325.0" />
             <TextField fx:id="pwd_f" layoutX="140.0" layoutY="354.0" />
-            <Button fx:id="login"  onAction="#handleLogin" layoutX="94.0" layoutY="415.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="168.0" text="Client.Login" />
-            <Label layoutX="50.0" layoutY="93.0" prefHeight="27.0" prefWidth="238.0" text="Small Store Gift-Card">
+            <Button fx:id="login" layoutX="94.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="24.0" prefWidth="168.0" text="Client.Login" />
+            <Label layoutX="50.0" layoutY="93.0" prefHeight="27.0" prefWidth="257.0" text="Small Store Gift-Card">
                <font>
                   <Font name="Arial Bold Italic" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="create" onAction= "#handleCreate" layoutX="96.0" layoutY="449.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="165.0" text="Create new one" />
+            <Button fx:id="create" layoutX="96.0" layoutY="449.0" mnemonicParsing="false" onAction="#handleCreate" prefHeight="24.0" prefWidth="165.0" text="Create new one" />
 
       </AnchorPane>
 </children>
 </StackPane>
-
