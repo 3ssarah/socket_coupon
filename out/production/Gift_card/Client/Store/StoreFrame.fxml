@@ -13,6 +13,7 @@
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Store.StoreController">
    <children>
       <Button fx:id="backBtn" layoutX="623.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="27.0" prefWidth="88.0" text="Back" />
+      <Button fx:id="f5Btn" layoutX="623.0" layoutY="70" mnemonicParsing="false" onAction="#handlef5Btn" prefHeight="27.0" prefWidth="88.0" text="F5" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <!--<image>-->
             <!--<Image url="" />-->

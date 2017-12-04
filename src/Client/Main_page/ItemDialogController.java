@@ -28,8 +28,8 @@ public class ItemDialogController {
     public void handleOk(ActionEvent event){
         mainClient.sendData(mainClient.getClient().getData().getStoreNAme());//send store name
 
-        mainClient.sendData(item_f.getText());//send item name
-        mainClient.sendData(price_f.getText());//send item price
+        mainClient.sendData(item_f.getText()+","+price_f.getText());//send item name
+        //mainClient.sendData(price_f.getText());//send item price
 //        try{
 ////            alert= new Alert(Alert.AlertType.CONFIRMATION);
 ////            alert.setTitle("Look!");
@@ -69,12 +69,6 @@ public class ItemDialogController {
         mainClient.sendData(temp);
 
 
-//        try{
-//            popAlert();
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
         Stage stage= (Stage)OKBtn_e.getScene().getWindow();
         stage.close();
     }

@@ -21,11 +21,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class StoreController implements Initializable{
     @FXML
-    private Button  sendBtn, backBtn;
+    private Button  sendBtn, backBtn, f5Btn;
     @FXML
     private Label addr, phone, type,store_name;
     @FXML
@@ -74,8 +78,10 @@ public class StoreController implements Initializable{
         m_list.clear();
         String temp;
         while((temp=mainClient.recvData()).equals("-1")!=true){
+            System.out.println(temp);
             m_list.add(temp);
         }
+        System.out.println("out");
 
     }
     public void setEventListView(){
@@ -85,14 +91,27 @@ public class StoreController implements Initializable{
         e_list.clear();
         String temp;
         while((temp=mainClient.recvData()).equals("-1")!=true){
+            System.out.println(temp);
             e_list.add(temp);
         }
+        System.out.println("out");
     }
     public void settingLabel(){
         store_name.setText(store.getStore_name());
         type.setText(store.getCategory());
         phone.setText(store.getStore_phone());
         addr.setText(store.getLocation());
+    }
+    public String getExpireDate(){
+        DateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+
+        Date current =new Date();
+
+        Calendar cal= Calendar.getInstance();
+        cal.setTime(current);
+        cal.add(Calendar.DATE,30);
+
+        return df.format(cal.getTime());
     }
 
     public void changeToDownload(String newValue){
@@ -107,8 +126,11 @@ public class StoreController implements Initializable{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("../Download/template.fxml"));
             Parent parent = loader.load();
             DownloadClient downClient=new DownloadClient(mainClient);
+            downClient.sendData("1");
             downCon=loader.<DownloadController>getController();
             downCon.setDownloadClient(downClient);
+            String[] temp={newValue,getExpireDate(), store.getStore_name()};
+            downCon.setItem(temp);
 
             Scene s= new Scene(parent);
             down.setScene(s);
@@ -116,6 +138,11 @@ public class StoreController implements Initializable{
             down.show();
 
         }catch(Exception e){e.printStackTrace();}
+    }
+    public void handlef5Btn(ActionEvent event){
+
+        setEventListView();
+        setMenuListView();
     }
 
     public void showEventDetails(String newValue){

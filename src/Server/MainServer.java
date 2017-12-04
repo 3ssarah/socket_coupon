@@ -188,14 +188,18 @@ class MainThread extends Thread{
                 if(temp.getStore_name().equals(storeName)) break;
             }
             String menuName= br.readLine();
-            String menuPrice= br.readLine();
+            System.out.println(menuName);
+           // String menuPrice= br.readLine();
            // Menu tempMenu= new Menu(menuName, temp, menuPrice);
            // temp.getItemlist().add(tempMenu);
 
             /**Save into file*/
+            System.out.println("timeto save in file");
             String filename = getClass().getResource("").getPath() + storeName + "_menu.txt";//file name= storeName_menu.txt
+
             BufferedWriter fw= new BufferedWriter(new FileWriter(filename, true));
-            fw.write(menuName+","+menuPrice+"\n");// save like : item name,1000,store name\n
+
+            fw.write(menuName+"\n");// save like : item name,1000
             fw.close();
 
         }catch(Exception e){e.printStackTrace();}
@@ -349,9 +353,7 @@ class MainThread extends Thread{
             System.out.println(situation+"recved");
 
             switch (situation){
-               case -1: //exit client
-                    this.clientSock_list.remove(this.name);
-                    break;
+
                 case 0: //refresh
                     System.out.println("sendStoreList and function");
                     sendStoreList();
@@ -383,7 +385,6 @@ class MainThread extends Thread{
                     System.out.println("send searched store data");
                     this.s_name=recvData();
                     sendSearchedStoreList();
-
                     System.out.println("end of sendSearchedStoreLsit()");
                     this.s_name=null;
                     this.s_location=null;

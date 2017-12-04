@@ -23,7 +23,7 @@ public class DownloadClient {
         this.primaryStage=mainClient.getPrimaryStage();
         try{
           this.client.setImgSock(new Socket(client.ServIP, client.ImgPort));
-          sendData("IMG socket setting done!");
+
 
         }catch(Exception e){e.printStackTrace();}
 

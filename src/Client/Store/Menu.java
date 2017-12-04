@@ -11,6 +11,7 @@ public class Menu {
     private String price;
     private String type="Product";
     private final  int day = 30; //term of validity ==1month
+    private String store_name=null;
     private Store store=null;
 
     public Menu(String product_name, Store store, String price){
@@ -27,7 +28,15 @@ public class Menu {
         this.price=price;
     }
 
-    public String getExpireDate(int day){
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
+    }
+
+    public String getExpireDate(){
         DateFormat df= new SimpleDateFormat("yyyy-MM-dd");
 
             Date current =new Date();

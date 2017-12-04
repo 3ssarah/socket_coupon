@@ -1,5 +1,7 @@
 package Client.Download;
 
+import Client.Main_page.MainClient;
+import Client.Store.Menu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.ObjectInputStream;
 import java.util.Optional;
 
@@ -29,19 +34,36 @@ public class DownloadController {
 
 
     private DownloadClient downClient;
+    private String[] item;
+    private String saved_filename;
+
+
     public void setDownloadClient(DownloadClient downloadClient){this.downClient=downloadClient;}
+    public void setItem(String[] item){this.item=item;}
+
 
     public void handleBuyBtn(ActionEvent event){
 
+
+
+        String result= item[0]+","+item[1]+","+item[2];
+        downClient.sendData(result);
+
         String imgPath;
         if(catCheck.isSelected()){
+           // imgPath=getClass().getResource("").getPath()+"cat.jpg";
             imgPath=catImg.getUrl();
         }else if(dogCheck.isSelected()){
             imgPath=dogImg.getUrl();
         }else
-            imgPath=birthdayImg.getUrl();
+           imgPath=birthdayImg.getUrl();
 
-        change(imgPath);
+        downClient.sendData(imgPath);
+        saved_filename=downClient.recvData();
+
+       // change(imgPath);
+        Stage stage= (Stage)buyBtn.getScene().getWindow();
+        stage.close();
 
     }
     public void handleCBtn(ActionEvent event){
@@ -58,8 +80,9 @@ public class DownloadController {
 
             Optional<ButtonType> result= alert.showAndWait();
             if(result.get()==ButtonType.OK){
+                downClient.sendData("1");
                 //sendData and change to download jpg fxml
-                downClient.sendData(commentArea.getText());
+               // downClient.sendData(commentArea.getText());
                 downClient.sendData(img);
 
                 Stage download= new Stage();
@@ -86,7 +109,8 @@ public class DownloadController {
 
     public void handleDownBtn(ActionEvent event){
         //send signal to Server
-        downClient.sendData("");
+        downClient.sendData("2");
+        change(saved_filename);
 
         try{
             ObjectInputStream ois= new ObjectInputStream(downClient.getClient().getImgSock().getInputStream());

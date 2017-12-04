@@ -108,8 +108,8 @@ public class MainController  implements Initializable  {
 
             storeCon.settingLabel();
             storeCon.setCommentsView();
-            storeCon.setEventListView();
-            storeCon.setMenuListView();
+//            storeCon.setEventListView();
+//            storeCon.setMenuListView();
             // storeCon.setCommentsView();
 
             System.out.println("set store and mainClient");
