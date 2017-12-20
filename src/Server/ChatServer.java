@@ -32,21 +32,21 @@ class ChatThread extends Thread{
         System.out.println("save file function");
 
         String storename= recvData();
-        String commnet= recvData();
+        String comment= recvData();
 
         /**save into file*/
         try{
             String filename= path+storename+"_comments.txt";
 
             BufferedWriter fw= new BufferedWriter(new FileWriter(filename,true));
-            fw.write(commnet+"\n");
-            System.out.println(commnet);
+            fw.write(comment+"\n");
+            System.out.println(comment);
 
             fw.close();
         }catch(Exception e){e.printStackTrace();}
 
     }
-    public void loadComments(){
+    public void loadComments(){/**signal: 2*/
         String storename= recvData();
         try {
             BufferedReader comment_load = new BufferedReader(new FileReader(path + storename + "_comments.txt"));
@@ -66,10 +66,11 @@ class ChatThread extends Thread{
             while(it.hasNext()){
                temp=it.next().toString();
                System.out.println(temp);
-                sendData(temp);
+               sendData(temp);
             }
             sendData("-1");
 
+            System.out.println("send comments done!");
 
 
 

@@ -5,6 +5,7 @@ import Client.Login.LoginClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController{
+public class RegisterController implements Initializable {
     //Register Frame
     @FXML
     private RadioButton radioBtn1, radioBtn2;
@@ -37,7 +38,7 @@ public class RegisterController{
 
     private LoginClient loginClient;
 
-    @FXML
+   @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 

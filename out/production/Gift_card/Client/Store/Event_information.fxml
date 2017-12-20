@@ -28,9 +28,9 @@
             <Label text="Start Date" GridPane.rowIndex="1" />
             <Label text="End Date" GridPane.rowIndex="2" />
             <Label text="Contents" GridPane.rowIndex="3" />
-            <TextField fx:id="eventName" GridPane.columnIndex="1" />
-            <TextField  fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField  fx:id="endDate" prefHeight="6.0" prefWidth="263.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="eventName" GridPane.columnIndex="1" />
+            <Label  fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label  fx:id="endDate" prefHeight="6.0" prefWidth="263.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextArea  fx:id="contents" prefHeight="97.0" prefWidth="232.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>

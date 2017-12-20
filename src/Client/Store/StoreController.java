@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -42,6 +39,7 @@ public class StoreController implements Initializable{
     ObservableList<String> e_list= FXCollections.observableArrayList();
     ObservableList<String> comment_list= FXCollections.observableArrayList();
 
+
     /**Controller for menu and event*/
     private static EventInfoController eventCon;
     private static MenuController menuCon;
@@ -52,6 +50,8 @@ public class StoreController implements Initializable{
     private ChatClient chatClient;
     /**store 참조*/
     private Store store=null;
+
+    private String selectedEvent;
 
     public void setChatClient(ChatClient chatClient){this.chatClient=chatClient;}
     public void setMainClient(MainClient mainClient){this.mainClient=mainClient;}
@@ -69,31 +69,45 @@ public class StoreController implements Initializable{
         commentListView.setItems(comment_list);
         menuList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->changeToDownload(newValue));
         eventList.getSelectionModel().selectedItemProperty().addListener((observable ,oldValue, newValue)->showEventDetails(newValue));
-
     }
+
     public void setMenuListView(){
         mainClient.sendData("6");
         mainClient.sendData(store.getStore_name());
 
         m_list.clear();
         String temp;
-        while((temp=mainClient.recvData()).equals("-1")!=true){
-            System.out.println(temp);
+        while(true){
+            temp=mainClient.recvData();
+            if(temp.equals("-1")){
+                System.out.println(temp);
+                break;
+            }
             m_list.add(temp);
-        }
+            System.out.println(temp);
+       }
+
         System.out.println("out");
 
     }
     public void setEventListView(){
         mainClient.sendData("4");
         mainClient.sendData(store.getStore_name());
-
+        int i=0;
         e_list.clear();
         String temp;
-        while((temp=mainClient.recvData()).equals("-1")!=true){
+        while(true){
+            temp=mainClient.recvData();
+            if(temp.equals("-1")) break;
+            e_list.add(i,temp);
             System.out.println(temp);
-            e_list.add(temp);
+            i++;
+            System.out.println("loop");
         }
+//        while((temp=mainClient.recvData()).equals("-1")!=true){
+//            System.out.println(temp);
+//            e_list.add(temp);
+//        }
         System.out.println("out");
     }
     public void settingLabel(){
@@ -143,10 +157,12 @@ public class StoreController implements Initializable{
 
         setEventListView();
         setMenuListView();
+        //setCommentsView();
     }
 
     public void showEventDetails(String newValue){
 
+        selectedEvent=newValue;
         //send specific signal to server
         Stage event_info= new Stage();
         event_info.initOwner(mainClient.getPrimaryStage());
@@ -157,12 +173,17 @@ public class StoreController implements Initializable{
 
             eventCon= loader.<EventInfoController>getController();
             eventCon.setMainClient(mainClient);
-
+            eventCon.setEventName(newValue);
+            eventCon.setStorename(store.getStore_name());
 
             Scene s= new Scene(parent);
             event_info.setScene(s);
             event_info.setResizable(false);
             event_info.show();
+
+            eventCon.setContents();
+
+
 
         }catch (Exception e){e.printStackTrace();}
     }
@@ -192,6 +213,7 @@ public class StoreController implements Initializable{
         comment_list.clear();
         String temp;
         while((temp=chatClient.recvData()).equals("-1")!=true){
+            System.out.println(temp);
             comment_list.add(temp);
         }
     }

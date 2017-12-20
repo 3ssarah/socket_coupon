@@ -249,6 +249,7 @@ class MainThread extends Thread{
             while((temp=item_load.readLine())!=null){
                 tempStore.getItemlist().add(temp);
             }
+            item_load.close();
         }catch(Exception e){e.printStackTrace();}
     }
     public void sendItemlist(String storename){
@@ -266,6 +267,7 @@ class MainThread extends Thread{
             sendData(temp);
         }
         sendData("-1");
+        System.out.println("send item list done!");
     }
     public void loadEventlist(String storename){
         try{
@@ -283,6 +285,7 @@ class MainThread extends Thread{
             while((temp=item_load.readLine())!=null){
                 tempStore.getEventList().add(temp);
             }
+            item_load.close();
         }catch(Exception e){e.printStackTrace();}
     }
     public void sendEventlist(String storename){
@@ -301,6 +304,34 @@ class MainThread extends Thread{
             sendData(arr[0]);
         }
         sendData("-1");
+        System.out.println("send event list done!");
+    }
+    public void sendEventInformation(String storename){
+
+        String temp=null;
+        Iterator it = this.storeList.iterator();
+        Store tempStore = null;
+
+        /**recv event name*/
+        String eventName=recvData();
+
+        while (it.hasNext()) {
+            tempStore = (Store) it.next();
+            if (tempStore.getStore_name().equals(storename)) break;
+        }
+        Iterator iit= tempStore.getEventList().iterator();
+
+        while(iit.hasNext()){
+            temp=iit.next().toString();
+            String[]arr= temp.split("&@");
+            if(arr[0].equals(eventName)){
+                for(int i=0; i<arr.length;i++){
+                    sendData(arr[i]);
+                    System.out.println(arr[i]);
+                }
+                break;
+            }
+        }
     }
 
 
@@ -313,6 +344,7 @@ class MainThread extends Thread{
             sendData(temp.getStore_name());
         }
         sendData("-1");
+        System.out.println("send store list done!");
     }
 
 
@@ -398,6 +430,9 @@ class MainThread extends Thread{
                     sendItemlist(this.s_name);
                     this.s_name=null;
                     break;
+                case 7: //send selected Event information
+                    this.s_name=recvData();
+                    sendEventInformation(this.s_name);
             }
         }
     }

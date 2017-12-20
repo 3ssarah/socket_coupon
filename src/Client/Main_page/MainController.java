@@ -42,7 +42,7 @@ public class MainController  implements Initializable  {
     /**tab: my_page*/
 
     /**tab: setting*/
-    @FXML private Button addStoreBtn, addEventBtn, addMenuBtn, seeMenuBtn;
+    @FXML private Button addStoreBtn, addEventBtn, addMenuBtn;
 
 
     /**참조하기 위한 객체*/
@@ -102,15 +102,15 @@ public class MainController  implements Initializable  {
             storeCon= loader.<StoreController>getController();
             storeCon.setMainClient(mainClient);
             storeCon.setChatClient(chatClient);
-            chatClient.sendData("2");
+            chatClient.sendData("2");// ask chat server to load comments from _comment.txt file
             chatClient.sendData(store1.getStore_name());
             storeCon.setStore(store1);
 
             storeCon.settingLabel();
-            storeCon.setCommentsView();
+ //           storeCon.setCommentsView();
 //            storeCon.setEventListView();
 //            storeCon.setMenuListView();
-            // storeCon.setCommentsView();
+
 
             System.out.println("set store and mainClient");
 

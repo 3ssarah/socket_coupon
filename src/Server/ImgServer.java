@@ -59,8 +59,8 @@ class ImgThread extends Thread{
 
 
             barcode.setDrawingText(false);
-            barcode.setBarHeight(50);
-            barcode.setBarWidth(70);
+            barcode.setBarHeight(10);
+            barcode.setBarWidth(20);
             BufferedImage barcode_m=BarcodeImageHandler.getImage(barcode);
 
             BufferedImage mergedImage= new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
